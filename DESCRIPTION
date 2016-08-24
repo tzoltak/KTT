@@ -6,7 +6,10 @@ Date: 2016-08-22
 Authors@R: c(
   person("Tomasz", "Żółtak", email = "tomek@zozlak.org", role = c("aut", "cre")))
 Description: More about what it does (maybe more than one line).
-Depends: R (>= 3.0)
+Depends:
+  R (>= 3.0),
+  knitr (>= 1.14),
+  rmarkdown (>= 1.0)
 License: MIT + file LICENSE
 LazyData: TRUE
 Encoding: UTF-8

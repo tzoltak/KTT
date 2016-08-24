@@ -119,5 +119,5 @@ wykres_lmr = function(x, wsk = "Pearson") {
   }
   text(trudnosci, mocRoznicujaca, colnames(x), pos = 1)
 
-  return(NULL)
+  invisible(NULL)
 }
