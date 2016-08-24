@@ -4,13 +4,15 @@
 \alias{moc_roznicujaca}
 \title{Moc różnicująca}
 \usage{
-moc_roznicujaca(x, na.rm = TRUE)
+moc_roznicujaca(x, na.rm = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{x}{macierz typu \code{numeric} lub ramka danych (data frame)
 zawierająca zmienne typu \code{numeric}}
 
 \item{na.rm}{wartość logiczna - czy przy obliczeniach ignorować braki danych}
+
+\item{verbose}{wartość logiczna - czy wydrukować wyniki analizy}
 }
 \value{
 Funkcja zwraca milcząco dwuelementową listę, której elementy zawierają:
@@ -25,5 +27,8 @@ Funkcja zwraca milcząco dwuelementową listę, której elementy zawierają:
 }
 \description{
 Funkcja służy do oszacowania mocy różnicującej zadania.
+}
+\examples{
+moc_roznicujaca(symTest)
 }
 

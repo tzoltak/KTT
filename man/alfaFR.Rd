@@ -4,13 +4,15 @@
 \alias{alfaFR}
 \title{Szacowanie rzetelności}
 \usage{
-alfaFR(x, na.rm = TRUE)
+alfaFR(x, na.rm = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{x}{macierz typu \code{numeric} lub ramka danych (data frame)
 zawierająca zmienne typu \code{numeric}}
 
 \item{na.rm}{wartość logiczna - czy przy obliczeniach ignorować braki danych}
+
+\item{verbose}{wartość logiczna - czy wydrukować wyniki analizy}
 }
 \value{
 Funkcja zwraca milcząco trzyelementową listę, której elementy zawierają:
@@ -25,5 +27,8 @@ Funkcja zwraca milcząco trzyelementową listę, której elementy zawierają:
 Funkcja służy do oszacowania rzeteleności testu przy pomocy
 współczynnika alfa Feldt-Raju. Zwraca oszacowanie dla całego testu oraz
 z wyłączeniem poszczególnych zadań.
+}
+\examples{
+alfaFR(symTest)
 }
 

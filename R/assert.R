@@ -39,5 +39,12 @@ assert_mdfn = function(x, nazwaArgumentu = "x") {
                          "'.\n", collapse = "")))
     }
   }
+  if (ncol(x) == 1) {
+    warning(paste0("Podane dane zawierają tylko jedną kolumnę, co czyni",
+                   "analizy psychometrczne bezsensownymi."))
+  } else if (ncol(x) == 2) {
+    warning(paste0("Podane dane zawierają tylko dwie kolumny - część analiz",
+                   "może nie mieć sensu."))
+  }
   return(TRUE)
 }
