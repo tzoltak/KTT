@@ -1,21 +1,40 @@
+#' @name alfa
 #' @title Szacowanie rzetelności
-#' @description Funkcja służy do oszacowania rzeteleności testu przy pomocy
-#' współczynnika alfa Cronbacha. Zwraca oszacowanie dla całego testu oraz
-#' z wyłączeniem poszczególnych zadań.
+#' @description Funkcje służące do oszacowania rzeteleności testu przy pomocy
+#' współczynnika alfa Cronbacha lub alfa Feldt-Rahu.
 #' @param x macierz typu \code{numeric} lub ramka danych (data frame)
 #' zawierająca zmienne typu \code{numeric}
 #' @param na.rm wartość logiczna - czy przy obliczeniach ignorować braki danych
 #' @param verbose wartość logiczna - czy wydrukować wyniki analizy
+#' @details
+#' Funkcja \code{alfaC} wykorzystuje współczynnik alfa Cronbacha - szerzej
+#' rozpoznawalny i stosowany, ale oparty na modelu nakładającym na test bardziej
+#' restrykcyjne założenia (taka sama siła związku pomiędzy mierzoną cechą,
+#' a wynikiem każdego zadania). W efekcie alfa Cronbacha może nieco zaniżać
+#' oszacowanie rzetelności testu.
+#'
+#' Funkcja  \code{alfaFR} wykorzystuje współczynnik alfa Feldt-Raju,
+#' o analogicznej interpretacji i podobnej konstrukcji, ale dopuszczający różną
+#' siłę związku pomiędzy mierzoną cechą a wynikami każdego zadania. Jego użycie
+#' jest bardziej adekwatne szczególnie w sytuacji, gdy w teście występuje duża
+#' rozpiętość trudności zadań i/lub różne zadania mają różne skale oceny. Jego
+#' wartość jest zawsze nie mniejsza niż wartość współczynnika alfa Cronbacha.
+#' @seealso \code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}
 #' @return
-#' Funkcja zwraca milcząco trzyelementową listę, której elementy zawierają:
+#' Funkcje zwracają milcząco trzyelementową listę, której elementy zawierają:
 #' \itemize{
-#'    \item{\code{alfa} wartość współczynnika alfa Cronbacha dla całego testu,}
+#'    \item{\code{alfa} wartość współczynnika alfa Cronbacha/Feldt-Raju dla
+#'          całego testu,}
 #'    \item{\code{alfaBZ} wektor liczbowy zawierający współczynniki alfa
-#'          Cronbacha obliczone dla testu z wyłączeniem danego zadania,}
-#'    \item{\code{wsp = "alfa Cronbacha".}}
+#'          Cronbacha/Feldt-Raju obliczone dla testu z wyłączeniem danego
+#'          zadania,}
+#'    \item{\code{wsp = ("alfa Cronbacha" | "alfa Feldt-Raju").}}
 #' }
 #' @examples
 #' alfaC(symTest)
+#' alfaFR(symTest)
+NULL
+#' @rdname alfa
 #' @export
 #' @importFrom stats var setNames
 alfaC = function(x, na.rm = TRUE, verbose = TRUE) {
@@ -29,7 +48,8 @@ alfaC = function(x, na.rm = TRUE, verbose = TRUE) {
   if (verbose) {
     cat("Oszacowanie rzetelności współczynnikiem alfa Cronbacha:\n\n",
         infoMacierzDanych(x), "\n\n",
-        "alfa Cronbacha = ", round(alfa, 3), "\n\n", sep = "")
+        "alfa Cronbacha = ", format(alfa, digits = 3, nsmall = 3), "\n\n",
+        sep = "")
   }
 
   if (ncol(x) > 2) {
@@ -42,9 +62,10 @@ alfaC = function(x, na.rm = TRUE, verbose = TRUE) {
       lZnMax = max(nchar(colnames(x)))
       cat("Oszacowania rzetelności bez poszczególnych zadań:\n",
           paste0("  ", format(colnames(x), width = lZnMax, justify = "right"),
-                 "  ", format(alfaBZ, digits = 3),
-                 ifelse(alfaBZ > alfa, " (!)", ""), "\n", collapse = ""),
-          "Zadania, po usunięciu których rzetelność rośnie oznaczono '(!)'.\n\n",
+                 "  ", format(alfaBZ, digits = 3, nsmall = 3),
+                 ifelse(alfaBZ > alfa & !is.na(alfaBZ), " (!)", ""), "\n",
+                 collapse = ""),
+          "Zadania, po usunięciu których rzetelność rośnie oznaczono '(!)'\n\n",
           sep = "")
     }
   } else {
@@ -60,24 +81,7 @@ alfaC = function(x, na.rm = TRUE, verbose = TRUE) {
   class(wynik) = c(class(wynik), "oszacowanieRzetelnosci")
   invisible(wynik)
 }
-#' @title Szacowanie rzetelności
-#' @description Funkcja służy do oszacowania rzeteleności testu przy pomocy
-#' współczynnika alfa Feldt-Raju. Zwraca oszacowanie dla całego testu oraz
-#' z wyłączeniem poszczególnych zadań.
-#' @param x macierz typu \code{numeric} lub ramka danych (data frame)
-#' zawierająca zmienne typu \code{numeric}
-#' @param na.rm wartość logiczna - czy przy obliczeniach ignorować braki danych
-#' @param verbose wartość logiczna - czy wydrukować wyniki analizy
-#' @return
-#' Funkcja zwraca milcząco trzyelementową listę, której elementy zawierają:
-#' \itemize{
-#'    \item{\code{alfa} wartość współczynnika alfa Cronbacha dla całego testu,}
-#'    \item{\code{alfaBZ} wektor liczbowy zawierający współczynniki alfa
-#'          Cronbacha obliczone dla testu z wyłączeniem danego zadania,}
-#'    \item{\code{wsp = "alfa Feldt-Raju".}}
-#' }
-#' @examples
-#' alfaFR(symTest)
+#' @rdname alfa
 #' @export
 #' @importFrom stats var cov setNames
 alfaFR = function(x, na.rm = TRUE, verbose = TRUE) {
@@ -94,7 +98,8 @@ alfaFR = function(x, na.rm = TRUE, verbose = TRUE) {
   if (verbose) {
     cat("Oszacowanie rzetelności współczynnikiem alfa Feldt-Raju:\n\n",
         infoMacierzDanych(x), "\n\n",
-        "alfa Feldt-Raju = ", round(alfa, 3), "\n\n", sep = "")
+        "alfa Feldt-Raju = ", format(alfa, digits = 3, nsmall = 3), "\n\n",
+        sep = "")
   }
 
   if (ncol(x) > 2) {
@@ -111,9 +116,10 @@ alfaFR = function(x, na.rm = TRUE, verbose = TRUE) {
       lZnMax = max(nchar(colnames(x)))
       cat("Oszacowania rzetelności bez poszczególnych zadań:\n",
           paste0("  ", format(colnames(x), width = lZnMax, justify = "right"),
-                 "  ", format(alfaBZ, digits = 3),
-                 ifelse(alfaBZ > alfa, " (!)", ""), "\n", collapse = ""),
-          "Zadania, po usunięciu których rzetelność rośnie oznaczono '(!)'.\n\n",
+                 "  ", format(alfaBZ, digits = 3, nsmall = 3),
+                 ifelse(alfaBZ > alfa & !is.na(alfaBZ), " (!)", ""), "\n",
+                 collapse = ""),
+          "Zadania, po usunięciu których rzetelność rośnie oznaczono '(!)'\n\n",
           sep = "")
     }
   } else {

@@ -4,6 +4,26 @@
 #' zawierająca zmienne typu \code{numeric}
 #' @param na.rm wartość logiczna - czy przy obliczeniach ignorować braki danych
 #' @param verbose wartość logiczna - czy wydrukować wyniki analizy
+#' @details
+#' \itemize{
+#'   \item{\code{korelacja liniowa Pearsona (punktowo-duseryjna)}:
+#'         dla zadań z wąskimi skalami oceny (w szczególności ocenianych
+#'         binarnie: 0 lub 1) w praktyce niemożliwe jest osiągnięcie korelacji
+#'         bliskich jedności; maksymalna możliwa do osiągnięcia korelacja jest
+#'         tym mniejsza, im bardziej trudność/łatwość zadania odbiega od 0.5.}
+#'   \item{\code{korelacja dwuseryjna}: adekwatna tylko do zadań ocenianych
+#'         binarnie (0 lub 1) - dla innych nie jest tu obliczana; jest zawsze
+#'         większa (co do wartości bezwzględnej) od korelacji Pearsona, ale
+#'         jeśli rozkład sumy punktów wyraźnie różni się od rozkładu normalnego,
+#'         może przeszacowywać natężenie związku (w tym przyjmować bezsensowne
+#'         wartości większe niż 1);}
+#'   \item{\code{korelacja Pearsona bez zadania} - korelacja liniowa Pearsona
+#'         (j.w.), ale z sumą punktów pomniejszoną o liczbę punktów uzyskanych
+#'         za dane zadanie; bardziej adekwatna od zwykłej korelacji Pearsona dla
+#'         krótkich testów lub w sytuacji, gdy dane zadanie ma dużo szerszą
+#'         skalę oceny niż pozostałe;}
+#' }
+#' @seealso \code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}
 #' @return
 #' Funkcja zwraca milcząco dwuelementową listę, której elementy zawierają:
 #' \itemize{
@@ -32,7 +52,7 @@ moc_roznicujaca = function(x, na.rm = TRUE, verbose = TRUE) {
              colMeans(x, na.rm = TRUE),
              NA)
   korDS = ifelse(maska,
-                 korP * sqrt(p * (1 - p)) / dnorm(qnorm(max(c(p, 1 - p)))),
+                 korP * sqrt(p * (1 - p)) / dnorm(qnorm(ifelse(p > 0.5, p, 1 - p))),
                  NA)
   korDS = setNames(korDS, colnames(x))
   if (any(korDS > 1)) {

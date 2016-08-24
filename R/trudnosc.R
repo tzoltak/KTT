@@ -6,6 +6,7 @@
 #' liczbę puntków możliwych do uzyskania za poszczególne zadania
 #' @param na.rm wartość logiczna - czy przy obliczeniach ignorować braki danych
 #' @param verbose wartość logiczna - czy wydrukować wyniki analizy
+#' @seealso \code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}
 #' @return
 #' Funkcja zwraca milcząco wektor z oszacowaniami trudności zadań.
 #' @examples
@@ -69,6 +70,7 @@ trudnosc = function(x, maks = NULL, na.rm = TRUE, verbose = TRUE) {
     cat("\n")
   }
 
+  attributes(trudnosci)$maks = setNames(maks, colnames(x))
   invisible(trudnosci)
 }
 #' @title Łatwość zadań
