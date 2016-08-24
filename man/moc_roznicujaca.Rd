@@ -26,7 +26,7 @@ Funkcja zwraca milcząco dwuelementową listę, której elementy zawierają:
 }
 }
 \description{
-Funkcja służy do oszacowania mocy różnicującej zadania.
+Funkcja służy do oszacowania mocy różnicującej zadań.
 }
 \examples{
 moc_roznicujaca(symTest)

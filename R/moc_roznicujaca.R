@@ -1,5 +1,5 @@
 #' @title Moc różnicująca
-#' @description Funkcja służy do oszacowania mocy różnicującej zadania.
+#' @description Funkcja służy do oszacowania mocy różnicującej zadań.
 #' @param x macierz typu \code{numeric} lub ramka danych (data frame)
 #' zawierająca zmienne typu \code{numeric}
 #' @param na.rm wartość logiczna - czy przy obliczeniach ignorować braki danych
@@ -52,7 +52,7 @@ moc_roznicujaca = function(x, na.rm = TRUE, verbose = TRUE) {
 
   if (verbose) {
     cat("Oszacowanie mocy różnicujące zadań:\n\n",
-        "test złożony z ", ncol(x), " zadań\n\n", sep = "")
+        infoMacierzDanych(x), "\n\n", sep = "")
     print(data.frame(zadanie = colnames(x), "Pearson" = korP,
                      "bez zadania" = korBZ, "dwuseryjna" = korDS,
                      check.names = FALSE), row.names = FALSE, digits = 3)

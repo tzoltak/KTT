@@ -2,7 +2,9 @@
 
 export(alfaC)
 export(alfaFR)
+export(latwosc)
 export(moc_roznicujaca)
+export(trudnosc)
 importFrom(stats,cor)
 importFrom(stats,cov)
 importFrom(stats,dnorm)

@@ -28,7 +28,7 @@ alfaC = function(x, na.rm = TRUE, verbose = TRUE) {
     (1 - sum(war, na.rm = na.rm) / var(suma, na.rm = na.rm))
   if (verbose) {
     cat("Oszacowanie rzetelności współczynnikiem alfa Cronbacha:\n\n",
-        "test złożony z ", ncol(x), " zadań\n\n",
+        infoMacierzDanych(x), "\n\n",
         "alfa Cronbacha = ", round(alfa, 3), "\n\n", sep = "")
   }
 
@@ -93,7 +93,7 @@ alfaFR = function(x, na.rm = TRUE, verbose = TRUE) {
   alfa = (1 / (1 - sum(lambda^2, na.rm = na.rm))) * (1 - sum(war) / warSuma)
   if (verbose) {
     cat("Oszacowanie rzetelności współczynnikiem alfa Feldt-Raju:\n\n",
-        "test złożony z ", ncol(x), " zadań\n\n",
+        infoMacierzDanych(x), "\n\n",
         "alfa Feldt-Raju = ", round(alfa, 3), "\n\n", sep = "")
   }
 
