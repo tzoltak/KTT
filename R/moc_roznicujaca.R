@@ -35,7 +35,7 @@
 #'          poszczególnych zadań.}
 #' }
 #' @examples
-#' moc_roznicujaca(symTest)
+#' moc_roznicujaca(wynikiSymTest)
 #' @export
 #' @importFrom stats var cor dnorm qnorm setNames
 moc_roznicujaca = function(x, na.rm = TRUE, verbose = TRUE) {
@@ -72,7 +72,7 @@ moc_roznicujaca = function(x, na.rm = TRUE, verbose = TRUE) {
 
   if (verbose) {
     cat("Oszacowanie mocy różnicujące zadań:\n\n",
-        infoMacierzDanych(x), "\n\n", sep = "")
+        info_macierz_danych(x), "\n\n", sep = "")
     print(data.frame(zadanie = colnames(x), "Pearson" = korP,
                      "bez zadania" = korBZ, "dwuseryjna" = korDS,
                      check.names = FALSE), row.names = FALSE, digits = 3)

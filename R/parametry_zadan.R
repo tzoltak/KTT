@@ -12,7 +12,7 @@
 #' @return
 #' Funkcja zwraca milcząco listę z parametrami zadań.
 #' @examples
-#' parametry_zadan(symTest)
+#' parametry_zadan(wynikiSymTest)
 #' @export
 parametry_zadan = function(x, maks = NULL, na.rm = TRUE, verbose = TRUE) {
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
@@ -23,7 +23,7 @@ parametry_zadan = function(x, maks = NULL, na.rm = TRUE, verbose = TRUE) {
   alfyFR = alfaFR(x, na.rm = na.rm, verbose = FALSE)
 
   cat("Parametry zadań:\n\n",
-      infoMacierzDanych(x), "\n\n",
+      info_macierz_danych(x), "\n\n",
       "rzetelność testu:\n",
       "alfa Cronbacha = ", format(alfyC$alfa, digits = 3, nsmall = 3), "\n",
       "alfa Feldt-Raju = ", format(alfyFR$alfa, digits = 3, nsmall = 3),

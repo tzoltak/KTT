@@ -49,7 +49,7 @@ Funkcja służy do oszacowania mocy różnicującej zadań.
 }
 }
 \examples{
-moc_roznicujaca(symTest)
+moc_roznicujaca(wynikiSymTest)
 }
 \seealso{
 \code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}

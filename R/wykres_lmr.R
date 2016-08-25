@@ -43,7 +43,7 @@
 #' @return
 #' Funkcja nic nie zwraca.
 #' @examples
-#' wykres_lmr(symTest)
+#' wykres_lmr(wynikiSymTest)
 #' @export
 #' @importFrom graphics abline lines par plot text
 #' @importFrom grDevices grey

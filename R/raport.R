@@ -12,7 +12,7 @@
 #' @return
 #' Funkcja nic nie zwraca.
 #' @examples
-#' raport(symTest)
+#' raport(wynikiSymTest)
 #' @export
 #' @importFrom rmarkdown render html_document
 #' @importFrom knitr kable

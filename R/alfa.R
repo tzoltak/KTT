@@ -31,8 +31,8 @@
 #'    \item{\code{wsp = ("alfa Cronbacha" | "alfa Feldt-Raju").}}
 #' }
 #' @examples
-#' alfaC(symTest)
-#' alfaFR(symTest)
+#' alfaC(wynikiSymTest)
+#' alfaFR(wynikiSymTest)
 NULL
 #' @rdname alfa
 #' @export
@@ -47,7 +47,7 @@ alfaC = function(x, na.rm = TRUE, verbose = TRUE) {
     (1 - sum(war, na.rm = na.rm) / var(suma, na.rm = na.rm))
   if (verbose) {
     cat("Oszacowanie rzetelności współczynnikiem alfa Cronbacha:\n\n",
-        infoMacierzDanych(x), "\n\n",
+        info_macierz_danych(x), "\n\n",
         "alfa Cronbacha = ", format(alfa, digits = 3, nsmall = 3), "\n\n",
         sep = "")
   }
@@ -97,7 +97,7 @@ alfaFR = function(x, na.rm = TRUE, verbose = TRUE) {
   alfa = (1 / (1 - sum(lambda^2, na.rm = na.rm))) * (1 - sum(war) / warSuma)
   if (verbose) {
     cat("Oszacowanie rzetelności współczynnikiem alfa Feldt-Raju:\n\n",
-        infoMacierzDanych(x), "\n\n",
+        info_macierz_danych(x), "\n\n",
         "alfa Feldt-Raju = ", format(alfa, digits = 3, nsmall = 3), "\n\n",
         sep = "")
   }

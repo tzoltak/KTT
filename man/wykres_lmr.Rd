@@ -56,7 +56,7 @@ szersze skale oceny i/lub rozkład sumy wyraźnie różni się od rozkładu
 normalnego, możliwe jest uzyskanie wyższych wartości korelacji.
 }
 \examples{
-wykres_lmr(symTest)
+wykres_lmr(wynikiSymTest)
 }
 \seealso{
 \code{\link{parametry_zadan}}

@@ -25,7 +25,7 @@ Funkcja szacuje parametry zadań: łatwości/trudności, moc
 różnicującą, rzetelność testu z wyłączeniem zadania.
 }
 \examples{
-parametry_zadan(symTest)
+parametry_zadan(wynikiSymTest)
 }
 \seealso{
 \code{\link{moc_roznicujaca}}, \code{\link{alfa}},

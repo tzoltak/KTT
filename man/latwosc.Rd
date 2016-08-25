@@ -2,8 +2,11 @@
 % Please edit documentation in R/trudnosc.R
 \name{latwosc}
 \alias{latwosc}
-\title{Łatwość zadań}
+\alias{trudnosc}
+\title{Trudność zadań}
 \usage{
+trudnosc(x, maks = NULL, na.rm = TRUE, verbose = TRUE)
+
 latwosc(x, maks = NULL, na.rm = TRUE, verbose = TRUE)
 }
 \arguments{
@@ -18,12 +21,16 @@ liczbę puntków możliwych do uzyskania za poszczególne zadania}
 \item{verbose}{wartość logiczna - czy wydrukować wyniki analizy}
 }
 \value{
-Funkcja zwraca milcząco wektor z oszacowaniami łatwości zadań.
+Funkcje zwracają milcząco wektor z oszacowaniami łatwości/trudności zadań.
 }
 \description{
-Funkcja służy do oszacowania łatwości zadań.
+Funkcje do szacowania łatwości/trudności zadań.
 }
 \examples{
-latwosc(symTest)
+trudnosc(wynikiSymTest)
+latwosc(wynikiSymTest)
+}
+\seealso{
+\code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}
 }
 

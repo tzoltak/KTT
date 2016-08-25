@@ -1,5 +1,6 @@
+#' @name latwosc
 #' @title Trudność zadań
-#' @description Funkcja służy do oszacowania trudności zadań.
+#' @description Funkcje do szacowania łatwości/trudności zadań.
 #' @param x macierz typu \code{numeric} lub ramka danych (data frame)
 #' zawierająca zmienne typu \code{numeric}
 #' @param maks opcjonalnie wektor liczb całkowitych opisujący maksymalną
@@ -8,9 +9,10 @@
 #' @param verbose wartość logiczna - czy wydrukować wyniki analizy
 #' @seealso \code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}
 #' @return
-#' Funkcja zwraca milcząco wektor z oszacowaniami trudności zadań.
+#' Funkcje zwracają milcząco wektor z oszacowaniami łatwości/trudności zadań.
 #' @examples
-#' trudnosc(symTest)
+#' trudnosc(wynikiSymTest)
+#' latwosc(wynikiSymTest)
 #' @export
 trudnosc = function(x, maks = NULL, na.rm = TRUE, verbose = TRUE) {
   assert_mdfn(x)
@@ -63,7 +65,7 @@ trudnosc = function(x, maks = NULL, na.rm = TRUE, verbose = TRUE) {
   }
   if (verbose) {
     cat("Oszacowanie trudności zadań:\n\n",
-        infoMacierzDanych(x), "\n\n", sep = "")
+        info_macierz_danych(x), "\n\n", sep = "")
     print(data.frame(zadanie = colnames(x), "maks.pkt." = maks,
                      "trudność" = trudnosci, "łatwość" = 1 - trudnosci,
                      check.names = FALSE), row.names = FALSE, digits = 2)
@@ -73,18 +75,7 @@ trudnosc = function(x, maks = NULL, na.rm = TRUE, verbose = TRUE) {
   attributes(trudnosci)$maks = setNames(maks, colnames(x))
   invisible(trudnosci)
 }
-#' @title Łatwość zadań
-#' @description Funkcja służy do oszacowania łatwości zadań.
-#' @param x macierz typu \code{numeric} lub ramka danych (data frame)
-#' zawierająca zmienne typu \code{numeric}
-#' @param maks opcjonalnie wektor liczb całkowitych opisujący maksymalną
-#' liczbę puntków możliwych do uzyskania za poszczególne zadania
-#' @param na.rm wartość logiczna - czy przy obliczeniach ignorować braki danych
-#' @param verbose wartość logiczna - czy wydrukować wyniki analizy
-#' @return
-#' Funkcja zwraca milcząco wektor z oszacowaniami łatwości zadań.
-#' @examples
-#' latwosc(symTest)
+#' @rdname latwosc
 #' @export
 latwosc = function(x, maks = NULL, na.rm = TRUE, verbose = TRUE) {
   latwosci = 1 - trudnosc(x, maks = maks, na.rm = na.rm, verbose = verbose)

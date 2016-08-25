@@ -48,8 +48,8 @@ rozpiętość trudności zadań i/lub różne zadania mają różne skale oceny.
 wartość jest zawsze nie mniejsza niż wartość współczynnika alfa Cronbacha.
 }
 \examples{
-alfaC(symTest)
-alfaFR(symTest)
+alfaC(wynikiSymTest)
+alfaFR(wynikiSymTest)
 }
 \seealso{
 \code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}

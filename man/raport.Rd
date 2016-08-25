@@ -28,7 +28,7 @@ Funkcja generuje raport zawierający wyniki analizy
 psyhometrycznej testu.
 }
 \examples{
-raport(symTest)
+raport(wynikiSymTest)
 }
 \seealso{
 \code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}

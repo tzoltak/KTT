@@ -1,0 +1,29 @@
+#' @docType data
+#' @keywords datasets
+#' @name daneWzrost
+#' @title Ankieta na temat wzrostu - dane
+#' @description
+#' Wyniki ankiety dotyczącej wzrostu, przeprowadzonej wśród uczestników
+#' trzeciego \emph{Spotkania Entuzjastów R}, które odbyło się w Warszawie
+#' 24 kwietnia 2014 r. (p. <http://smarterpoland.pl/SER/#SERIII>).
+#'
+#' \bold{Opis zmiennych w zbiorze:}
+#' \itemize{
+#'   \item{\code{wzrost} wzrost badanego [cm]}
+#'   \item{\code{rozmiar_buta} rozmiar buta badanego [numeracja \emph{europejska}]}
+#'   \item{\code{p1_p} pyt. 1: \emph{Zdarza mi się słyszeć, że mógłbym zostać koszykarzem.} [\bold{Tak}/Nie]}
+#'   \item{\code{p2_p} pyt. 2: \emph{W autobusie mogę wygodnie trzymać się górnych (poziomych) uchwytów.} [\bold{Tak}/Nie]}
+#'   \item{\code{p3_p} pyt. 3: \emph{Łóżka w hotelach są dla mnie zwykle za krótkie.} [\bold{Tak}/Nie]}
+#'   \item{\code{p4_p} pyt. 4: \emph{Inni ludzie proszą mnie, żebym podał im rzeczy, które leżą wysoko.} [\bold{Tak}/Nie]}
+#'   \item{\code{p5_p} pyt. 5: \emph{Wchodząc do pomieszczeń muszę nieraz uważać, aby nie uderzyć się w głowę.} [\bold{Tak}/Nie]}
+#'   \item{\code{p6_n} pyt. 6: \emph{Sięganie po rzeczy z szafek wiszących w kuchni sprawia mi trudność.} [Tak/\bold{Nie}]}
+#'   \item{\code{p7_p} pyt. 7: \emph{Siedząc w samochodzie (...) mam często zbyt mało miejsca na nogi.} [\bold{Tak}/Nie]}
+#'   \item{\code{p8_n} pyt. 8: \emph{Wolał(a)bym być wyższy.} [Tak/\bold{Nie}]}
+#'   \item{\code{p9_n} pyt. 9: \emph{Rozmawiając z innymi często muszę zadzierać głowę.} [Tak/\bold{Nie}]}
+#'   \item{\code{p10_p} pyt. 10: \emph{Na większość ludzi mogę patrzeć z góry (dosłownie, nie w przenośni).} [\bold{Tak}/Nie]}
+#'   \item{\code{p11_n} pyt. 11: \emph{Na fotografiach grupowych zwykle stoję w pierwszym rzędzie.} [Tak/\bold{Nie}]}
+#'   \item{\code{p12_n} pyt. 12: \emph{Na koncertach muszę stać blisko sceny (ekranu), bo inaczej nic nie widzę.} [Tak/\bold{Nie}]}
+#' }
+#' @format data frame: 43 obserwacje, 14 zmiennych
+#' @seealso \code{\link{opisTestuWzrost}}
+NULL
