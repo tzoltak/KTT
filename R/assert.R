@@ -48,3 +48,39 @@ assert_mdfn = function(x, nazwaArgumentu = "x") {
   }
   return(TRUE)
 }
+#' @title Sprawdzanie argumentów funkcji
+#' @description Funkcja sprawdza, czy argument jest wektorem liczb pasującym
+#' do odpowiedniej macierzy/ramki danych.
+#' @param x argument do sprawdzenia - wektor
+#' @param y argument, względem którego \code{x} ma być zweryfikowany - macierz
+#' lub ramka danych
+#' @param nazwaArgumentu nazwa argumentu, która zostanie wstawiona do
+#' komunikatów o błędzie
+#' @return
+#' Funkcja zwraca \code{TRUE} jeśli argument \code{x} jest poprawny.
+#' W przeciwnym wypadku wywołuje błąd.
+assert_mm = function(x, y, nazwaArgumentu = "x") {
+  if (!is.vector(x)) {
+    stop("Argument '", nazwaArgumentu, "' musi być wektorem liczb.")
+  }
+  if (!is.numeric(x)) {
+    stop("Argument '", nazwaArgumentu, "' musi być wektorem liczb.")
+  }
+  if (length(x) != ncol(y)) {
+    stop(paste0("Wektor podany w argumencie '", nazwaArgumentu,
+                "' musi mieć tyle samo  elementów, ile jest kolumn w macierzy ",
+                "danych"))
+  }
+  if (!is.null(names(x))) {
+    if (any(names(x) != colnames(y))) {
+      warning("Nazwy kolumn macierzy danych i nazwy elemenentów wektora ",
+              "podanego w argumencie '", nazwaArgumentu, "' nie pasują do ",
+              "siebie.")
+    }
+  }
+  if (all(is.na(x))) {
+    warning("Wektor podany w argumencie '", nazwaArgumentu, "' zawiera same ",
+            "braki danych.")
+  }
+  return(TRUE)
+}

@@ -5,16 +5,18 @@
 #' zawierająca zmienne typu \code{numeric}
 #' @param maks opcjonalnie wektor liczb całkowitych opisujący maksymalną
 #' liczbę puntków możliwych do uzyskania za poszczególne zadania
+#' @param min opcjonalnie wektor liczb całkowitych opisujący minimalną
+#' wartość, jaką może przyjąć wynik poszczególnych zadań
 #' @param na.rm wartość logiczna - czy przy obliczeniach ignorować braki danych
 #' @param verbose wartość logiczna - czy wydrukować wyniki analizy
-#' @seealso \code{\link{moc_roznicujaca}}, \code{\link{alfa}},
-#' \code{\link{wykres_lmr}}
+#' @seealso \code{\link{latwosc}}, \code{\link{moc_roznicujaca}},
+#' \code{\link{alfa}}, \code{\link{wykres_lmr}}
 #' @return
 #' Funkcja zwraca milcząco listę z parametrami zadań.
 #' @examples
 #' parametry_zadan(wynikiSymTest)
 #' @export
-parametry_zadan = function(x, maks = NULL, na.rm = TRUE, verbose = TRUE) {
+parametry_zadan = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE) {
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
 
   trudnosci = trudnosc(x, na.rm = na.rm, verbose = FALSE)
@@ -51,7 +53,8 @@ parametry_zadan = function(x, maks = NULL, na.rm = TRUE, verbose = TRUE) {
                                                   " (!)", "    ")),
                      check.names = FALSE), row.names = FALSE)
 
-    cat("\nMR-P       - moc różnicująca: korelacja liniowa Pearsona (punktowo-dwuseryjna)\n",
+    cat("\n",
+        "MR-P       - moc różnicująca: korelacja liniowa Pearsona (punktowo-dwuseryjna)\n",
         "MR-PBZ     - moc różnicująca: korelacja Pearsona z sumą punktów z wyłączeniem danego zadania\n",
         "MR-DS      - moc różnicująca: korelacja dwuseryjna\n",
         "rzetBZ-aC  - rzetelność bez zadania: alfa Cronbacha\n",

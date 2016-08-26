@@ -5,7 +5,7 @@
 \alias{trudnosc}
 \title{Trudność zadań}
 \usage{
-trudnosc(x, maks = NULL, na.rm = TRUE, verbose = TRUE)
+trudnosc(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE)
 
 latwosc(x, maks = NULL, na.rm = TRUE, verbose = TRUE)
 }
@@ -16,6 +16,9 @@ zawierająca zmienne typu \code{numeric}}
 \item{maks}{opcjonalnie wektor liczb całkowitych opisujący maksymalną
 liczbę puntków możliwych do uzyskania za poszczególne zadania}
 
+\item{min}{opcjonalnie wektor liczb całkowitych opisujący minimalną
+wartość, jaką może przyjąć wynik poszczególnych zadań}
+
 \item{na.rm}{wartość logiczna - czy przy obliczeniach ignorować braki danych}
 
 \item{verbose}{wartość logiczna - czy wydrukować wyniki analizy}
@@ -25,6 +28,38 @@ Funkcje zwracają milcząco wektor z oszacowaniami łatwości/trudności zadań.
 }
 \description{
 Funkcje do szacowania łatwości/trudności zadań.
+}
+\details{
+\bold{Maksymalne i minimalne wartości}
+
+Domyślnie, zgodnie z konwencją typową dla testów wiedzy/umiejętności,
+jako minimalna możliwa do przyjęcia wartość wyniku zadania przyjmowane jest 0.
+Maksymalna możliwa do przyjęcia wartość określana jest z kolei empirycznie,
+jako największa wartość, która występuje w danych.
+
+Wykorzystanie argumentu \code{maks} jest konieczne, gdy ze względu na
+niewielką liczbę obserwacji w zbiorze i/lub dużą trudność zadania dla
+pewnych zadań w danych nie występuje maksymalna możliwa do osiągnięca liczba
+punktów. Wektor przekazywany argumentem \code{maks} może zawierać braki
+danych - dla odpowiednich zadań maksymalna możliwa do uzyskania wartość
+zostanie określona na podstawie danych (j.w.).
+
+Wykorzystanie argumentu \code{maks} jest konieczne w przypadku niektórych
+schematów kodowania odpowiedzi na pytania np. w testach psychologicznych,
+używających skal Likerta, czy dyferencjałów semantycznych. Często w takich
+przypadkach odpowiedzi kodowane są kolejnymi liczbami naturalnymi, począwszy
+od 1. Ogólnie rzecz biorąc, jeśli minimalną wartość, jaką może przyjąć wynik
+danego zadania jest różna od 0, należy podać ją przy pomocy argumentu
+\code{min}. Wektor przekazywany argumentem \code{min} może zawierać braki
+danych - dla odpowiednich zadań jako minimalna możliwa do uzyskania wartość
+zostanie przyjęte 0.
+
+\bold{Obliczania łatwości/trudności dla zadań o minimalnej możliwej wartości różnej od 0}
+
+Jeśli minimalna możliwa do uzyskania wartość wyniku zadania jest różna od 0,
+łatwość obliczona zostanie jako \code{E(X - min) / (max - min)}, gdzie
+\code{X} oznacza wynik zadania, a \code{min} i \code{max} odpowiednio
+najmniejszą i największą możliwą do uzyskania wartość wyniku zadania.
 }
 \examples{
 trudnosc(wynikiSymTest)

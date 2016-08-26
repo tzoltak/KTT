@@ -4,7 +4,8 @@
 \alias{parametry_zadan}
 \title{Parametry zadań}
 \usage{
-parametry_zadan(x, maks = NULL, na.rm = TRUE, verbose = TRUE)
+parametry_zadan(x, maks = NULL, min = NULL, na.rm = TRUE,
+  verbose = TRUE)
 }
 \arguments{
 \item{x}{macierz typu \code{numeric} lub ramka danych (data frame)
@@ -12,6 +13,9 @@ zawierająca zmienne typu \code{numeric}}
 
 \item{maks}{opcjonalnie wektor liczb całkowitych opisujący maksymalną
 liczbę puntków możliwych do uzyskania za poszczególne zadania}
+
+\item{min}{opcjonalnie wektor liczb całkowitych opisujący minimalną
+wartość, jaką może przyjąć wynik poszczególnych zadań}
 
 \item{na.rm}{wartość logiczna - czy przy obliczeniach ignorować braki danych}
 
@@ -28,7 +32,7 @@ różnicującą, rzetelność testu z wyłączeniem zadania.
 parametry_zadan(wynikiSymTest)
 }
 \seealso{
-\code{\link{moc_roznicujaca}}, \code{\link{alfa}},
-\code{\link{wykres_lmr}}
+\code{\link{latwosc}}, \code{\link{moc_roznicujaca}},
+\code{\link{alfa}}, \code{\link{wykres_lmr}}
 }
 

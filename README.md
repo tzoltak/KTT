@@ -27,7 +27,7 @@ Uruchamamiamy instalator i przechodzimy przez kolejne etapy klikając "OK" lub "
 Uruchamiamy program RStudio i w panel po lewej stronie okna programu, zawierający konsolę R wpisujemy (wklejamy) polecenia:
 
 ```
-install.packages(c("devtools"))
+install.packages(c("devtools", "knitr", "rmarkdown", "rio"))
 devtools::install_github('tzoltak/KTT')
 ```
 

@@ -5,8 +5,41 @@
 #' zawierająca zmienne typu \code{numeric}
 #' @param maks opcjonalnie wektor liczb całkowitych opisujący maksymalną
 #' liczbę puntków możliwych do uzyskania za poszczególne zadania
+#' @param min opcjonalnie wektor liczb całkowitych opisujący minimalną
+#' wartość, jaką może przyjąć wynik poszczególnych zadań
 #' @param na.rm wartość logiczna - czy przy obliczeniach ignorować braki danych
 #' @param verbose wartość logiczna - czy wydrukować wyniki analizy
+#' @details
+#' \bold{Maksymalne i minimalne wartości}
+#'
+#' Domyślnie, zgodnie z konwencją typową dla testów wiedzy/umiejętności,
+#' jako minimalna możliwa do przyjęcia wartość wyniku zadania przyjmowane jest 0.
+#' Maksymalna możliwa do przyjęcia wartość określana jest z kolei empirycznie,
+#' jako największa wartość, która występuje w danych.
+#'
+#' Wykorzystanie argumentu \code{maks} jest konieczne, gdy ze względu na
+#' niewielką liczbę obserwacji w zbiorze i/lub dużą trudność zadania dla
+#' pewnych zadań w danych nie występuje maksymalna możliwa do osiągnięca liczba
+#' punktów. Wektor przekazywany argumentem \code{maks} może zawierać braki
+#' danych - dla odpowiednich zadań maksymalna możliwa do uzyskania wartość
+#' zostanie określona na podstawie danych (j.w.).
+#'
+#' Wykorzystanie argumentu \code{maks} jest konieczne w przypadku niektórych
+#' schematów kodowania odpowiedzi na pytania np. w testach psychologicznych,
+#' używających skal Likerta, czy dyferencjałów semantycznych. Często w takich
+#' przypadkach odpowiedzi kodowane są kolejnymi liczbami naturalnymi, począwszy
+#' od 1. Ogólnie rzecz biorąc, jeśli minimalną wartość, jaką może przyjąć wynik
+#' danego zadania jest różna od 0, należy podać ją przy pomocy argumentu
+#' \code{min}. Wektor przekazywany argumentem \code{min} może zawierać braki
+#' danych - dla odpowiednich zadań jako minimalna możliwa do uzyskania wartość
+#' zostanie przyjęte 0.
+#'
+#' \bold{Obliczania łatwości/trudności dla zadań o minimalnej możliwej wartości różnej od 0}
+#'
+#' Jeśli minimalna możliwa do uzyskania wartość wyniku zadania jest różna od 0,
+#' łatwość obliczona zostanie jako \code{E(X - min) / (max - min)}, gdzie
+#' \code{X} oznacza wynik zadania, a \code{min} i \code{max} odpowiednio
+#' najmniejszą i największą możliwą do uzyskania wartość wyniku zadania.
 #' @seealso \code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}
 #' @return
 #' Funkcje zwracają milcząco wektor z oszacowaniami łatwości/trudności zadań.
@@ -14,39 +47,12 @@
 #' trudnosc(wynikiSymTest)
 #' latwosc(wynikiSymTest)
 #' @export
-trudnosc = function(x, maks = NULL, na.rm = TRUE, verbose = TRUE) {
+trudnosc = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE) {
   assert_mdfn(x)
-  maskaMin = apply(x, 2, min, na.rm = TRUE) < 0
-  if (any(maskaMin & !is.na(maskaMin))) {
-    stop(paste0("Kolumny: '",
-                paste0(colnames(x)[maskaMin & !is.na(maskaMin)],
-                       collapse = "', '"),
-                ' zawierają wartości mniejsze od 0.'))
-  }
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
   if (!is.null(maks)) {
+    assert_mm(maks)
     maksEmp = apply(x, 2, max, na.rm = na.rm)
-    if (!is.vector(maks)) {
-      stop("Argument 'maks' musi być wektorem liczb dodatnich.")
-    }
-    if (!is.numeric(maks)) {
-      stop("Argument 'maks' musi być wektorem liczb dodatnich.")
-    }
-    if (any(maks <= 0 & !is.na(maks))) {
-      stop("Argument 'maks' musi być wektorem liczb dodatnich.")
-    }
-    if (length(maks) != ncol(x)) {
-      stop(paste0("Wektor podany w argumencie 'maks' musi mieć tyle samo ",
-                  "elementów, ile jest kolumn w macierzy (lub ramce danych) ",
-                  "podanych w argumencie 'x'."))
-    }
-    if (!is.null(names(maks))) {
-      if (any(names(maks) != colnames(x))) {
-        warning("Nazwy kolumn macierzy (lub ramki danych) podanych ",
-                "w argumencie 'x' i nazwy elemenentów wektora podanego ",
-                "w argumencie 'maks' nie pasują do siebie.")
-      }
-    }
     if (any(maks < maksEmp & !is.na(maks))) {
       stop(paste0("W kolumnach '",
                   paste0(colnames(x)[maks < maksEmp & !is.na(maks)],
@@ -58,10 +64,32 @@ trudnosc = function(x, maks = NULL, na.rm = TRUE, verbose = TRUE) {
   } else {
     maks = apply(x, 2, max, na.rm = na.rm)
   }
+  if (!is.null(min)) {
+    assert_mm(min)
+    minEmp = apply(x, 2, min, na.rm = na.rm)
+    if (any(min > minEmp & !is.na(min))) {
+      stop(paste0("W kolumnach '",
+                  paste0(colnames(x)[min < minEmp & !is.na(min)],
+                         collapse = "', '"),
+                  "' niektóre obserwacje mają przypisaną liczbę punktów ",
+                  "mniejszą, niż minimalna możliwa (podana w argumencie ",
+                  "'min')."))
+    }
+  } else {
+    min = rep(0, ncol(x))
+    maskaMin = apply(x, 2, min, na.rm = TRUE) < 0
+    if (any(maskaMin & !is.na(maskaMin))) {
+      stop(paste0("Kolumny: '",
+                  paste0(colnames(x)[maskaMin & !is.na(maskaMin)],
+                         collapse = "', '"),
+                  ' zawierają wartości mniejsze od 0.'))
+    }
+  }
 
   trudnosci = setNames(as.numeric(rep(NA, ncol(x))), colnames(x))
   for (i in 1:ncol(x)) {
-    trudnosci[i] = 1 - mean(x[, i], na.rm = na.rm) / maks[i]
+    trudnosci[i] =
+      1 - (mean(x[, i], na.rm = na.rm) - min[i]) / (maks[i] - min[i])
   }
   if (verbose) {
     cat("Oszacowanie trudności zadań:\n\n",
@@ -78,6 +106,7 @@ trudnosc = function(x, maks = NULL, na.rm = TRUE, verbose = TRUE) {
 #' @rdname latwosc
 #' @export
 latwosc = function(x, maks = NULL, na.rm = TRUE, verbose = TRUE) {
-  latwosci = 1 - trudnosc(x, maks = maks, na.rm = na.rm, verbose = verbose)
+  latwosci =
+    1 - trudnosc(x, maks = maks, min = NULL, na.rm = na.rm, verbose = verbose)
   invisible(latwosci)
 }
