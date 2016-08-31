@@ -145,3 +145,20 @@ assert_min = function(min, x) {
   }
   return(min)
 }
+#' @title Sprawdzanie argumentów funkcji
+#' @description Funkcja sprawdza, czy argument jest wektorem liczb.
+#' @param x argument do sprawdzenia
+#' @param nazwaArgumentu nazwa argumentu, która zostanie wstawiona do
+#' komunikatów o błędzie
+#' @return
+#' Funkcja zwraca \code{TRUE} jeśli argument jest wektorem liczb. W przeciwnym
+#' wypadku wywołuje błąd.
+assert_w = function(x, nazwaArgumentu = "x") {
+  if (!is.vector(x)) {
+    stop(paste0("Argument '", nazwaArgumentu, "' musi być wektorem liczb."))
+  }
+  if (!is.numeric(x)) {
+    stop(paste0("Argument '", nazwaArgumentu, "' musi być wektorem liczb."))
+  }
+  return(TRUE)
+}

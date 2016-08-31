@@ -16,7 +16,7 @@
 #' @examples
 #' wykres_rs(wynikiSymTest)
 #' @export
-#' @importFrom graphics hist arrows grid
+#' @importFrom graphics hist arrows grid abline
 #' @importFrom grDevices grey
 #' @importFrom stats quantile pnorm
 wykres_rs = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE) {
@@ -59,15 +59,11 @@ wykres_rs = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE) {
 
   if (verbose) {
     kwantyle = quantile(suma, seq(0, 1, by = 0.25), na.rm = na.rm)
-    temp = c(format(round(kwantyle, 1), nsmall = 0),
-             format(round(sr, 1), nsmall = 1),
-             format(round(kwantyle[5] - kwantyle[1], 1), nsmall = 0),
-             format(round(c((kwantyle[4] - kwantyle[2]) / 2, oS), 1), nsmall = 1))
-    szerPMD = sapply(sub("[.,].*$", "", temp), nchar)
-    szerPMD = max(szerPMD) - szerPMD
-    for (i in 1:length(temp)) {
-      temp[i] = paste0(rep(" ", szerPMD[i]), temp[i], collapse = "")
-    }
+    temp = wyrownaj_do_lewej(c(
+      format(round(kwantyle, 1), nsmall = 0),
+      format(round(sr, 1), nsmall = 1),
+      format(round(kwantyle[5] - kwantyle[1], 1), nsmall = 0),
+      format(round(c((kwantyle[4] - kwantyle[2]) / 2, oS), 1), nsmall = 1)))
     cat("Parametry rozkładu sumy punktów:\n\n",
         "  minimum    = ", temp[1], "\n",
         "  1. kwartyl = ", temp[2], "\n",

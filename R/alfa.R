@@ -48,7 +48,7 @@ alfaC = function(x, na.rm = TRUE, verbose = TRUE) {
   if (verbose) {
     cat("Oszacowanie rzetelności współczynnikiem alfa Cronbacha:\n\n",
         info_macierz_danych(x), "\n\n",
-        "alfa Cronbacha = ", format(alfa, digits = 3, nsmall = 3), "\n\n",
+        "alfa Cronbacha = ", format(round(alfa, 3), nsmall = 3), "\n\n",
         sep = "")
   }
 
@@ -62,7 +62,7 @@ alfaC = function(x, na.rm = TRUE, verbose = TRUE) {
       lZnMax = max(nchar(colnames(x)))
       cat("Oszacowania rzetelności bez poszczególnych zadań:\n",
           paste0("  ", format(colnames(x), width = lZnMax, justify = "right"),
-                 "  ", format(alfaBZ, digits = 3, nsmall = 3),
+                 "  ", format(round(alfaBZ, 3), nsmall = 3),
                  ifelse(alfaBZ > alfa & !is.na(alfaBZ), " (!)", ""), "\n",
                  collapse = ""),
           "Zadania, po usunięciu których rzetelność rośnie oznaczono '(!)'\n\n",
@@ -98,7 +98,7 @@ alfaFR = function(x, na.rm = TRUE, verbose = TRUE) {
   if (verbose) {
     cat("Oszacowanie rzetelności współczynnikiem alfa Feldt-Raju:\n\n",
         info_macierz_danych(x), "\n\n",
-        "alfa Feldt-Raju = ", format(alfa, digits = 3, nsmall = 3), "\n\n",
+        "alfa Feldt-Raju = ", format(round(alfa, 3), nsmall = 3), "\n\n",
         sep = "")
   }
 
@@ -116,7 +116,7 @@ alfaFR = function(x, na.rm = TRUE, verbose = TRUE) {
       lZnMax = max(nchar(colnames(x)))
       cat("Oszacowania rzetelności bez poszczególnych zadań:\n",
           paste0("  ", format(colnames(x), width = lZnMax, justify = "right"),
-                 "  ", format(alfaBZ, digits = 3, nsmall = 3),
+                 "  ", format(round(alfaBZ, 3), nsmall = 3),
                  ifelse(alfaBZ > alfa & !is.na(alfaBZ), " (!)", ""), "\n",
                  collapse = ""),
           "Zadania, po usunięciu których rzetelność rośnie oznaczono '(!)'\n\n",
