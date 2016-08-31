@@ -50,41 +50,8 @@
 trudnosc = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE) {
   assert_mdfn(x)
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
-  if (!is.null(maks)) {
-    assert_mm(maks)
-    maksEmp = apply(x, 2, max, na.rm = na.rm)
-    if (any(maks < maksEmp & !is.na(maks))) {
-      stop(paste0("W kolumnach '",
-                  paste0(colnames(x)[maks < maksEmp & !is.na(maks)],
-                         collapse = "', '"),
-                  "' niektóre obserwacje mają przypisaną liczbę punktów ",
-                  "większą, niż maksymalna możliwa (podana w argumencie ",
-                  "'maks')."))
-    }
-  } else {
-    maks = apply(x, 2, max, na.rm = na.rm)
-  }
-  if (!is.null(min)) {
-    assert_mm(min)
-    minEmp = apply(x, 2, min, na.rm = na.rm)
-    if (any(min > minEmp & !is.na(min))) {
-      stop(paste0("W kolumnach '",
-                  paste0(colnames(x)[min < minEmp & !is.na(min)],
-                         collapse = "', '"),
-                  "' niektóre obserwacje mają przypisaną liczbę punktów ",
-                  "mniejszą, niż minimalna możliwa (podana w argumencie ",
-                  "'min')."))
-    }
-  } else {
-    min = rep(0, ncol(x))
-    maskaMin = apply(x, 2, min, na.rm = TRUE) < 0
-    if (any(maskaMin & !is.na(maskaMin))) {
-      stop(paste0("Kolumny: '",
-                  paste0(colnames(x)[maskaMin & !is.na(maskaMin)],
-                         collapse = "', '"),
-                  ' zawierają wartości mniejsze od 0.'))
-    }
-  }
+  maks = assert_maks(maks, x)
+  min = assert_min(min, x)
 
   trudnosci = setNames(as.numeric(rep(NA, ncol(x))), colnames(x))
   for (i in 1:ncol(x)) {

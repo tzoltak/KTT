@@ -84,3 +84,64 @@ assert_mm = function(x, y, nazwaArgumentu = "x") {
   }
   return(TRUE)
 }
+#' @title Sprawdzanie argumentów funkcji
+#' @description Funkcja sprawdza, czy argument jest pasującym do odpowiedniej
+#' macierzy/ramki danych wektorem opisującym minimalne możliwe do przyjęcia
+#' wartości.
+#' @param maks argument do sprawdzenia - wektor minimalnych wartości lub NULL
+#' @param x argument, względem którego \code{x} ma być zweryfikowany - macierz
+#' lub ramka danych
+#' @return
+#' Funkcja zwraca wektor o liczbie elementóW odpowiadającej liczie kolumn
+#' \code{x}, który zawiera minimalnych możliwych do przyjęcia wartości.
+assert_maks = function(maks, x) {
+  if (!is.null(maks)) {
+    assert_mm(maks)
+    maksEmp = apply(x, 2, max, na.rm = TRUE)
+    if (any(maks < maksEmp & !is.na(maks))) {
+      stop(paste0("W kolumnach '",
+                  paste0(colnames(x)[maks < maksEmp & !is.na(maks)],
+                         collapse = "', '"),
+                  "' niektóre obserwacje mają przypisaną liczbę punktów ",
+                  "większą, niż maksymalna możliwa (podana w argumencie ",
+                  "'maks')."))
+    }
+  } else {
+    maks = apply(x, 2, max, na.rm = TRUE)
+  }
+  return(maks)
+}
+#' @title Sprawdzanie argumentów funkcji
+#' @description Funkcja sprawdza, czy argument jest pasującym do odpowiedniej
+#' macierzy/ramki danych wektorem opisującym minimalne możliwe do przyjęcia
+#' wartości.
+#' @param min argument do sprawdzenia - wektor minimalnych wartości lub NULL
+#' @param x argument, względem którego \code{x} ma być zweryfikowany - macierz
+#' lub ramka danych
+#' @return
+#' Funkcja zwraca wektor o liczbie elementóW odpowiadającej liczie kolumn
+#' \code{x}, który zawiera minimalnych możliwych do przyjęcia wartości.
+assert_min = function(min, x) {
+  if (!is.null(min)) {
+    assert_mm(min, x, "min")
+    minEmp = apply(x, 2, min, na.rm = TRUE)
+    if (any(min > minEmp & !is.na(min))) {
+      stop(paste0("W kolumnach '",
+                  paste0(colnames(x)[min < minEmp & !is.na(min)],
+                         collapse = "', '"),
+                  "' niektóre obserwacje mają przypisaną liczbę punktów ",
+                  "mniejszą, niż minimalna możliwa (podana w argumencie ",
+                  "'min')."))
+    }
+  } else {
+    min = rep(0, ncol(x))
+    maskaMin = apply(x, 2, min, na.rm = TRUE) < 0
+    if (any(maskaMin & !is.na(maskaMin))) {
+      stop(paste0("Kolumny: '",
+                  paste0(colnames(x)[maskaMin & !is.na(maskaMin)],
+                         collapse = "', '"),
+                  ' zawierają wartości mniejsze od 0.'))
+    }
+  }
+  return(min)
+}
