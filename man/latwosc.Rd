@@ -44,7 +44,7 @@ punktów. Wektor przekazywany argumentem \code{maks} może zawierać braki
 danych - dla odpowiednich zadań maksymalna możliwa do uzyskania wartość
 zostanie określona na podstawie danych (j.w.).
 
-Wykorzystanie argumentu \code{maks} jest konieczne w przypadku niektórych
+Wykorzystanie argumentu \code{min} jest konieczne w przypadku niektórych
 schematów kodowania odpowiedzi na pytania np. w testach psychologicznych,
 używających skal Likerta, czy dyferencjałów semantycznych. Często w takich
 przypadkach odpowiedzi kodowane są kolejnymi liczbami naturalnymi, począwszy

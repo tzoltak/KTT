@@ -4,6 +4,10 @@
 #' zawierająca zmienne typu \code{numeric}
 #' @param wsk wskaźnik mocy różnicującej, który ma być użyty: 'Pearson',
 #' 'dwuseryjna' lub 'bez zadania'
+#' @param maks opcjonalnie wektor liczb całkowitych opisujący maksymalną
+#' liczbę puntków możliwych do uzyskania za poszczególne zadania
+#' @param min opcjonalnie wektor liczb całkowitych opisujący minimalną
+#' wartość, jaką może przyjąć wynik poszczególnych zadań
 #' @details
 #' \bold{Interpretacja wykresu}
 #' Ogólnie rzecz biorąc pożądane jest równomierne rozłożenie zadań ze względu
@@ -47,13 +51,21 @@
 #' @export
 #' @importFrom graphics abline lines par plot text
 #' @importFrom grDevices grey
-wykres_lmr = function(x, wsk = "Pearson") {
+wykres_lmr = function(x, wsk = "Pearson", maks = NULL, min = NULL) {
   wsk = tolower(wsk)
   if (!(wsk %in% c("pearson", "dwuseryjna", "bez zadania", "p", "d", "b"))) {
     stop(paste0("Parametr 'wsk' musi przyjmować jedną z wartości: 'pearson', ",
                 "'dwuseryjna', 'bez zadania'."))
   }
   wsk = substr(wsk, 1, 1)
+  if (is.null(maks) & "maks" %in% names(attributes(x))) {
+    maks = attributes(x)$maks
+  }
+  if (is.null(min) & "min" %in% names(attributes(x))) {
+    min = attributes(x)$min
+  }
+  maks = assert_maks(maks, x)
+  min = assert_min(min, x)
 
   trudnosci = trudnosc(x, na.rm = TRUE, verbose = FALSE)
   mocRoznicujaca = moc_roznicujaca(x, na.rm = TRUE, verbose = FALSE)

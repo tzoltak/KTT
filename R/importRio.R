@@ -1,2 +1,2 @@
-#' @importFrom rio export
+#' @importFrom rio import export
 NULL

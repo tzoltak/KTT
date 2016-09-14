@@ -7,8 +7,7 @@
 wykres_rwz(x, wartosci = NULL, verbose = TRUE)
 }
 \arguments{
-\item{x}{macierz typu \code{numeric} lub ramka danych (data frame)
-zawierająca zmienne typu \code{numeric}}
+\item{x}{wektor liczb zawierający wyniki zadania}
 
 \item{wartosci}{opcjonalnie wektor liczb zawierający wszystkie wartości,
 jakie może przyjąć wynik zadania}
@@ -19,9 +18,12 @@ jakie może przyjąć wynik zadania}
 Funkcja zwraca ramkę danych z rozkładem punktów uzyskanych za zadanie.
 }
 \description{
-Funkcja rysuje wykres rozkładu sumy punktów uzyskanych w teście.
+Funkcja rysuje wykres rozkładu sumy punktów uzyskanych w zadaniu.
 }
 \examples{
 wykres_rwz(apply(wynikiSymTest[, 1:4], 1, sum))
+}
+\seealso{
+\code{\link{parametry_zadan}}
 }
 

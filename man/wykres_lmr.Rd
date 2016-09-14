@@ -4,7 +4,7 @@
 \alias{wykres_lmr}
 \title{Parametry zadań}
 \usage{
-wykres_lmr(x, wsk = "Pearson")
+wykres_lmr(x, wsk = "Pearson", maks = NULL, min = NULL)
 }
 \arguments{
 \item{x}{macierz typu \code{numeric} lub ramka danych (data frame)
@@ -12,6 +12,12 @@ zawierająca zmienne typu \code{numeric}}
 
 \item{wsk}{wskaźnik mocy różnicującej, który ma być użyty: 'Pearson',
 'dwuseryjna' lub 'bez zadania'}
+
+\item{maks}{opcjonalnie wektor liczb całkowitych opisujący maksymalną
+liczbę puntków możliwych do uzyskania za poszczególne zadania}
+
+\item{min}{opcjonalnie wektor liczb całkowitych opisujący minimalną
+wartość, jaką może przyjąć wynik poszczególnych zadań}
 }
 \value{
 Funkcja nic nie zwraca.

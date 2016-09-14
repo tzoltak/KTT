@@ -40,6 +40,7 @@ NULL
 alfaC = function(x, na.rm = TRUE, verbose = TRUE) {
   assert_mdfn(x)
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
+  stopifnot(length(na.rm) == 1, length(verbose) == 1)
 
   suma = rowSums(x, na.rm = na.rm)
   war = apply(x, 2, var, na.rm = na.rm)

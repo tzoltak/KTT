@@ -12,6 +12,7 @@
 #' Szczegóły związane z użyciem argumentów \code{maks} i \code{min} opisane są
 #' w sekcji \code{Details} pomocy do funkcji \code{\link{latwosc}}
 #' i \code{\link{trudnosc}}.
+#' @seealso \code{\link{normy_staninowe}}, \code{\link{alfaC}}
 #' @return Funkcja nic nie zwraca.
 #' @examples
 #' wykres_rs(wynikiSymTest)
@@ -22,6 +23,13 @@
 wykres_rs = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE) {
   assert_mdfn(x)
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
+  stopifnot(length(na.rm) == 1, length(verbose) == 1)
+  if (is.null(maks) & "maks" %in% names(attributes(x))) {
+    maks = attributes(x)$maks
+  }
+  if (is.null(min) & "min" %in% names(attributes(x))) {
+    min = attributes(x)$min
+  }
   maks = round(sum(assert_maks(maks, x)), 0) + 0.5
   min = round(sum(assert_min(min, x)), 0) - 0.5
 

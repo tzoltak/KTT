@@ -18,7 +18,14 @@
 #' @export
 parametry_zadan = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE) {
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
+  stopifnot(length(na.rm) == 1, length(verbose) == 1)
 
+  if (is.null(maks) & "maks" %in% names(attributes(x))) {
+    maks = attributes(x)$maks
+  }
+  if (is.null(min) & "min" %in% names(attributes(x))) {
+    min = attributes(x)$min
+  }
   trudnosci = trudnosc(x, na.rm = na.rm, verbose = FALSE)
   mocRoznicujaca = moc_roznicujaca(x, na.rm = na.rm, verbose = FALSE)
   alfyC = alfaC(x, na.rm = na.rm, verbose = FALSE)

@@ -34,4 +34,7 @@ i \code{\link{trudnosc}}.
 \examples{
 wykres_rs(wynikiSymTest)
 }
+\seealso{
+\code{\link{normy_staninowe}}, \code{\link{alfaC}}
+}
 

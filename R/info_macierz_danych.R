@@ -8,8 +8,12 @@ info_macierz_danych = function(x) {
   stopifnot(is.matrix(x) | is.data.frame(x))
 
   lBD = sum(is.na(x))
-  return(paste0("test złożony z ", ncol(x), " zadań\n",
-                nrow(x), " obserwacji (zdających)\n",
+  lO = nrow(x) - 10 * floor(nrow(x) / 10)
+  return(paste0("test złożony z ", ncol(x), " zada",
+                ifelse(ncol(x) > 1, "ń", "nia"), "\n",
+                nrow(x), " obserwacj", ifelse(nrow(x) == 1, "a",
+                                              ifelse(lO < 5, "e", "i")),
+                " (zdający", ifelse(nrow(x) == 1, "", "ch"), ")\n",
                 ifelse(lBD == 0, "w macierzy danych nie ma braków danych",
                        paste0("w macierzy danych ",
                               ifelse(lBD < 5 & lBD > 1, "są ", "jest "), lBD,

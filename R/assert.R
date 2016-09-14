@@ -10,7 +10,7 @@
 assert_mdfn = function(x, nazwaArgumentu = "x") {
   if (!is.matrix(x) & !is.data.frame(x)) {
     stop(paste0("Argument '", nazwaArgumentu,
-                "' musi być macierz (matrix) lub ramką danych (data frame)."))
+                "' musi być macierzą (matrix) lub ramką danych (data frame)."))
   }
   if (is.matrix(x)) {
     if (!is.numeric(x)) {
@@ -78,7 +78,7 @@ assert_mm = function(x, y, nazwaArgumentu = "x") {
               "siebie.")
     }
   }
-  if (all(is.na(x))) {
+  if (all(is.na(x)) & length(x) > 1) {
     warning("Wektor podany w argumencie '", nazwaArgumentu, "' zawiera same ",
             "braki danych.")
   }
@@ -96,7 +96,7 @@ assert_mm = function(x, y, nazwaArgumentu = "x") {
 #' \code{x}, który zawiera minimalnych możliwych do przyjęcia wartości.
 assert_maks = function(maks, x) {
   if (!is.null(maks)) {
-    assert_mm(maks)
+    assert_mm(maks, x, "maks")
     maksEmp = apply(x, 2, max, na.rm = TRUE)
     if (any(maks < maksEmp & !is.na(maks))) {
       stop(paste0("W kolumnach '",
@@ -105,6 +105,8 @@ assert_maks = function(maks, x) {
                   "' niektóre obserwacje mają przypisaną liczbę punktów ",
                   "większą, niż maksymalna możliwa (podana w argumencie ",
                   "'maks')."))
+    } else {
+      maks = maksEmp
     }
   } else {
     maks = apply(x, 2, max, na.rm = TRUE)
@@ -132,6 +134,8 @@ assert_min = function(min, x) {
                   "' niektóre obserwacje mają przypisaną liczbę punktów ",
                   "mniejszą, niż minimalna możliwa (podana w argumencie ",
                   "'min')."))
+    } else {
+      min = minEmp
     }
   } else {
     min = rep(0, ncol(x))
@@ -159,6 +163,28 @@ assert_w = function(x, nazwaArgumentu = "x") {
   }
   if (!is.numeric(x)) {
     stop(paste0("Argument '", nazwaArgumentu, "' musi być wektorem liczb."))
+  }
+  return(TRUE)
+}
+#' @title Sprawdzanie argumentów funkcji
+#' @description Funkcja sprawdza, czy argument jest ciągiem znaków.
+#' @param x argument do sprawdzenia
+#' @param nazwaArgumentu nazwa argumentu, która zostanie wstawiona do
+#' komunikatów o błędzie
+#' @return
+#' Funkcja zwraca \code{TRUE} jeśli argument jest ciągiem znaków
+#' (jednoelementowym wektorem typu character). W przeciwnym wypadku wywołuje
+#' błąd.
+assert_t = function(x, nazwaArgumentu = "x") {
+  if (!is.vector(x)) {
+    stop(paste0("Argument '", nazwaArgumentu, "' musi być ciągiem znaków."))
+  }
+  if (!is.character(x)) {
+    stop(paste0("Argument '", nazwaArgumentu, "' musi być ciągiem znaków."))
+  }
+  if (length(x) != 1) {
+    stop(paste0("Argument '", nazwaArgumentu,
+                "' musi być jednoelementowym wektorem typu 'character'."))
   }
   return(TRUE)
 }

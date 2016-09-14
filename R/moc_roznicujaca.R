@@ -41,11 +41,24 @@
 moc_roznicujaca = function(x, na.rm = TRUE, verbose = TRUE) {
   assert_mdfn(x)
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
+  stopifnot(length(na.rm) == 1, length(verbose) == 1)
 
   suma = rowSums(x, na.rm = na.rm)
-  korP = apply(x, 2, cor, y = suma,
-               use = ifelse(na.rm, "complete.obs", "everything"))
+  korP = apply(x, 2, function(x, y, na.rm) {
+    if (var(x, na.rm = TRUE) == 0 | var(y, na.rm = TRUE) == 0) {
+      return(NaN)
+    }
+    else {
+      return(cor(x, y, use = ifelse(na.rm, "complete.obs", "everything")))
+    }
+  }, y = suma, na.rm = na.rm)
   korP = setNames(korP, colnames(x))
+  if (any(is.nan(korP))) {
+    warning(paste0("Obliczenie mocy różnicującej dla zadań:\n  '",
+                   paste0(names(korP)[is.nan(korP)], collapse = "',\n  '"),
+                   "'\nbyło niemożliwe ze względu na brak zróżnicowania punktacji."))
+    korP[is.nan(korP)] = NA
+  }
   maska = apply(x, 2, function(x) {
     return(all(x %in% c(0, 1, NA)) & all(c(0, 1) %in% x))})
   p = ifelse(maska,
@@ -55,7 +68,7 @@ moc_roznicujaca = function(x, na.rm = TRUE, verbose = TRUE) {
                  korP * sqrt(p * (1 - p)) / dnorm(qnorm(ifelse(p > 0.5, p, 1 - p))),
                  NA)
   korDS = setNames(korDS, colnames(x))
-  if (any(korDS > 1)) {
+  if (any(korDS > 1 & !is.na(korDS))) {
     warning(paste0("Uzyskano korelacje dwuseryjne większe od jedności.\n  ",
                    "Analiza wartości korelacji dwuseryjnych zapewne nie ma sensu.\n  ",
                    "Być może przyczyną jest to, że rozkład sumy punktów ",
@@ -65,17 +78,21 @@ moc_roznicujaca = function(x, na.rm = TRUE, verbose = TRUE) {
   korBZ = setNames(as.numeric(rep(NA, ncol(x))), colnames(x))
   if (ncol(x) > 1) {
     for (i in 1:ncol(x)) {
-      korBZ[i] = cor(x[, i], suma - x[, i],
-                     use = ifelse(na.rm, "complete.obs", "everything"))
+      if (var(x[, i]) != 0 & var(suma - x[, i]) != 0) {
+        korBZ[i] = cor(x[, i], suma - x[, i],
+                       use = ifelse(na.rm, "complete.obs", "everything"))
+      }
     }
   }
 
   if (verbose) {
     cat("Oszacowanie mocy różnicujące zadań:\n\n",
         info_macierz_danych(x), "\n\n", sep = "")
-    print(data.frame(zadanie = colnames(x), "Pearson" = korP,
-                     "bez zadania" = korBZ, "dwuseryjna" = korDS,
-                     check.names = FALSE), row.names = FALSE, digits = 3)
+    print(data.frame(zadanie = colnames(x),
+                     "Pearson" = format(round(korP, 3), nsmall = 3),
+                     "bez zadania" = format(round(korBZ, 3), nsmall = 3),
+                     "dwuseryjna" = format(round(korDS, 3), nsmall = 3),
+                     check.names = FALSE), row.names = FALSE)
     cat("\nPearson   - korelacja liniowa Pearsona (punktowo-dwuseryjna)\n",
         "bez zadania - korelacja Pearsona z sumą punktów z wyłączeniem danego zadania\n",
         "dwuseryjna  - korelacja dwuseryjna\n\n", sep = "")

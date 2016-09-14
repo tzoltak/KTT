@@ -24,7 +24,7 @@
 #' danych - dla odpowiednich zadań maksymalna możliwa do uzyskania wartość
 #' zostanie określona na podstawie danych (j.w.).
 #'
-#' Wykorzystanie argumentu \code{maks} jest konieczne w przypadku niektórych
+#' Wykorzystanie argumentu \code{min} jest konieczne w przypadku niektórych
 #' schematów kodowania odpowiedzi na pytania np. w testach psychologicznych,
 #' używających skal Likerta, czy dyferencjałów semantycznych. Często w takich
 #' przypadkach odpowiedzi kodowane są kolejnymi liczbami naturalnymi, począwszy
@@ -50,6 +50,13 @@
 trudnosc = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE) {
   assert_mdfn(x)
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
+  stopifnot(length(na.rm) == 1, length(verbose) == 1)
+  if (is.null(maks) & "maks" %in% names(attributes(x))) {
+    maks = attributes(x)$maks
+  }
+  if (is.null(min) & "min" %in% names(attributes(x))) {
+    min = attributes(x)$min
+  }
   maks = assert_maks(maks, x)
   min = assert_min(min, x)
 
@@ -62,12 +69,14 @@ trudnosc = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE) {
     cat("Oszacowanie trudności zadań:\n\n",
         info_macierz_danych(x), "\n\n", sep = "")
     print(data.frame(zadanie = colnames(x), "maks.pkt." = maks,
-                     "trudność" = trudnosci, "łatwość" = 1 - trudnosci,
-                     check.names = FALSE), row.names = FALSE, digits = 2)
+                     "trudność" = format(round(trudnosci, 2), nsmall = 2),
+                     "łatwość" = format(round(1 - trudnosci, 2), nsmall = 2),
+                     check.names = FALSE), row.names = FALSE)
     cat("\n")
   }
 
   attributes(trudnosci)$maks = setNames(maks, colnames(x))
+  attributes(trudnosci)$min = setNames(min, colnames(x))
   invisible(trudnosci)
 }
 #' @rdname latwosc

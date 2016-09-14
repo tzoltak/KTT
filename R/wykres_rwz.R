@@ -1,10 +1,10 @@
 #' @title Rozkład wyników zadania
-#' @description Funkcja rysuje wykres rozkładu sumy punktów uzyskanych w teście.
-#' @param x macierz typu \code{numeric} lub ramka danych (data frame)
-#' zawierająca zmienne typu \code{numeric}
+#' @description Funkcja rysuje wykres rozkładu sumy punktów uzyskanych w zadaniu.
+#' @param x wektor liczb zawierający wyniki zadania
 #' @param wartosci opcjonalnie wektor liczb zawierający wszystkie wartości,
 #' jakie może przyjąć wynik zadania
 #' @param verbose wartość logiczna - czy wydrukować wyniki analizy
+#' @seealso \code{\link{parametry_zadan}}
 #' @return Funkcja zwraca ramkę danych z rozkładem punktów uzyskanych za zadanie.
 #' @examples
 #' wykres_rwz(apply(wynikiSymTest[, 1:4], 1, sum))
@@ -21,6 +21,8 @@ wykres_rwz = function(x, wartosci = NULL, verbose = TRUE) {
     }
     x = factor(x, wartosci)
   }
+  stopifnot(verbose %in% c(FALSE, TRUE))
+  stopifnot(length(verbose) == 1)
 
   x = table(x, useNA = "no")
   y = prop.table(x)

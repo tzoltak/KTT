@@ -22,6 +22,7 @@
 normy_staninowe = function(x, na.rm = TRUE, verbose = TRUE) {
   assert_mdfn(x)
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
+  stopifnot(length(na.rm) == 1, length(verbose) == 1)
 
   suma = rowSums(x, na.rm = na.rm)
   punktyCiecia = mean(suma, na.rm = na.rm) +
@@ -62,4 +63,17 @@ normy_staninowe = function(x, na.rm = TRUE, verbose = TRUE) {
 
   return(list(normyStaninowe = normyStaninowe,
               wynikiStaninowe = wynikiStaninowe))
+}
+#' @title Normy staninowe dla sumy punktów
+#' @description Funkcja przekodowuje wynik wyrażony w staninach na wartości
+#' opisujące przydział do trzech grup: 1-3, 4-6, 7-9 stanin.
+#' @param x wektor liczb całkowitych z przedziału [1;9]
+#' @return wektor ciągów tekstów
+#' @examples
+#' x = normy_staninowe(wynikiSymTest)$wynikiStaninowe
+#' ftable(x, grupuj_staniny(x))
+#' @export
+grupuj_staniny = function(x) {
+  stopifnot(all(x %in% 1:9))
+  return(c("staniny 1-3", "staniny 4-6", "staniny 7-9")[ceiling(x / 3)])
 }
