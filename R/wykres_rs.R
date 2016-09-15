@@ -1,4 +1,4 @@
-#' @title Rozkład sumy punktów
+#' @title Rozklad sumy punktow
 #' @description Funkcja rysuje wykres rozkładu sumy punktów uzyskanych w teście.
 #' @param x macierz typu \code{numeric} lub ramka danych (data frame)
 #' zawierająca zmienne typu \code{numeric}
@@ -12,8 +12,9 @@
 #' Szczegóły związane z użyciem argumentów \code{maks} i \code{min} opisane są
 #' w sekcji \code{Details} pomocy do funkcji \code{\link{latwosc}}
 #' i \code{\link{trudnosc}}.
-#' @seealso \code{\link{normy_staninowe}}, \code{\link{alfaC}}
-#' @return Funkcja nic nie zwraca.
+#' @seealso \code{\link{normy_staninowe}}, \code{\link{alfa_c}}
+#' @return Funkcja zwraca milcząco wektor wartości sumy punktów dla
+#' poszczególnych obserwacji.
 #' @examples
 #' wykres_rs(wynikiSymTest)
 #' @export
@@ -67,22 +68,25 @@ wykres_rs = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE) {
 
   if (verbose) {
     kwantyle = quantile(suma, seq(0, 1, by = 0.25), na.rm = na.rm)
-    temp = wyrownaj_do_lewej(c(
+    parRS = wyrownaj_do_lewej(c(
       format(round(kwantyle, 1), nsmall = 0),
       format(round(sr, 1), nsmall = 1),
       format(round(kwantyle[5] - kwantyle[1], 1), nsmall = 0),
       format(round(c((kwantyle[4] - kwantyle[2]) / 2, oS), 1), nsmall = 1)))
+    setNames(parRS, c("minimum", "1. kwartyl", "mediana", "3. kwartyl",
+                      "maksimum", "średnia", "rozstęp", "odch. ćwiartkowe",
+                      "odch. standardowe"))
     cat("Parametry rozkładu sumy punktów:\n\n",
-        "  minimum    = ", temp[1], "\n",
-        "  1. kwartyl = ", temp[2], "\n",
-        "  mediana    = ", temp[3], "\n",
-        "  3. kwartyl = ", temp[4], "\n",
-        "  maksimum   = ", temp[5], "\n",
-        "  średnia    = ", temp[6], "\n",
+        "  minimum    = ", parRS[1], "\n",
+        "  1. kwartyl = ", parRS[2], "\n",
+        "  mediana    = ", parRS[3], "\n",
+        "  3. kwartyl = ", parRS[4], "\n",
+        "  maksimum   = ", parRS[5], "\n",
+        "  średnia    = ", parRS[6], "\n",
         " -------------------------------\n",
-        "  rozstęp           = ", temp[7], "\n",
-        "  odch. ćwiartkowe  = ", temp[8], "\n",
-        "  odch. standardowe = ", temp[9], "\n\n",
+        "  rozstęp           = ", parRS[7], "\n",
+        "  odch. ćwiartkowe  = ", parRS[8], "\n",
+        "  odch. standardowe = ", parRS[9], "\n\n",
         sep = "")
     rozkladTeoretyczny = c(pnorm(seq(1.5, 8.5, by = 1), 5, 2), 1) -
       c(0, pnorm(seq(1.5, 8.5, by = 1), 5, 2))
@@ -103,5 +107,5 @@ wykres_rs = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE) {
     cat("\n")
   }
 
-  invisible(NULL)
+  invisible(suma)
 }

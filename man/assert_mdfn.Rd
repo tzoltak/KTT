@@ -2,7 +2,7 @@
 % Please edit documentation in R/assert.R
 \name{assert_mdfn}
 \alias{assert_mdfn}
-\title{Sprawdzanie argumentów funkcji}
+\title{Sprawdzanie argumentow funkcji}
 \usage{
 assert_mdfn(x, nazwaArgumentu = "x")
 }

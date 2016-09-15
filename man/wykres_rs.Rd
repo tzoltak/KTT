@@ -2,7 +2,7 @@
 % Please edit documentation in R/wykres_rs.R
 \name{wykres_rs}
 \alias{wykres_rs}
-\title{Rozkład sumy punktów}
+\title{Rozklad sumy punktow}
 \usage{
 wykres_rs(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE)
 }
@@ -21,7 +21,8 @@ wartość, jaką może przyjąć wynik poszczególnych zadań}
 \item{verbose}{wartość logiczna - czy wydrukować wyniki analizy}
 }
 \value{
-Funkcja nic nie zwraca.
+Funkcja zwraca milcząco wektor wartości sumy punktów dla
+poszczególnych obserwacji.
 }
 \description{
 Funkcja rysuje wykres rozkładu sumy punktów uzyskanych w teście.
@@ -35,6 +36,6 @@ i \code{\link{trudnosc}}.
 wykres_rs(wynikiSymTest)
 }
 \seealso{
-\code{\link{normy_staninowe}}, \code{\link{alfaC}}
+\code{\link{normy_staninowe}}, \code{\link{alfa_c}}
 }
 

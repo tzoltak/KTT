@@ -2,7 +2,7 @@
 % Please edit documentation in R/parametry_zadan.R
 \name{parametry_zadan}
 \alias{parametry_zadan}
-\title{Parametry zadań}
+\title{Parametry zadan}
 \usage{
 parametry_zadan(x, maks = NULL, min = NULL, na.rm = TRUE,
   verbose = TRUE)
@@ -33,6 +33,6 @@ parametry_zadan(wynikiSymTest)
 }
 \seealso{
 \code{\link{latwosc}}, \code{\link{moc_roznicujaca}},
-\code{\link{alfa}}, \code{\link{wykres_lmr}}
+\code{\link{alfa_c}}, \code{\link{wykres_tmr}}
 }
 

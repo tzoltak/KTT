@@ -1,4 +1,4 @@
-#' @title Parametry zadań
+#' @title Parametry zadan
 #' @description Funkcja szacuje parametry zadań: łatwości/trudności, moc
 #' różnicującą, rzetelność testu z wyłączeniem zadania.
 #' @param x macierz typu \code{numeric} lub ramka danych (data frame)
@@ -10,7 +10,7 @@
 #' @param na.rm wartość logiczna - czy przy obliczeniach ignorować braki danych
 #' @param verbose wartość logiczna - czy wydrukować wyniki analizy
 #' @seealso \code{\link{latwosc}}, \code{\link{moc_roznicujaca}},
-#' \code{\link{alfa}}, \code{\link{wykres_lmr}}
+#' \code{\link{alfa_c}}, \code{\link{wykres_tmr}}
 #' @return
 #' Funkcja zwraca milcząco listę z parametrami zadań.
 #' @examples
@@ -28,8 +28,8 @@ parametry_zadan = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = T
   }
   trudnosci = trudnosc(x, na.rm = na.rm, verbose = FALSE)
   mocRoznicujaca = moc_roznicujaca(x, na.rm = na.rm, verbose = FALSE)
-  alfyC = alfaC(x, na.rm = na.rm, verbose = FALSE)
-  alfyFR = alfaFR(x, na.rm = na.rm, verbose = FALSE)
+  alfyC = alfa_c(x, na.rm = na.rm, verbose = FALSE)
+  alfyFR = alfa_fr(x, na.rm = na.rm, verbose = FALSE)
 
   cat("Parametry zadań:\n\n",
       info_macierz_danych(x), "\n\n",
@@ -39,6 +39,7 @@ parametry_zadan = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = T
       "\n\n", sep = "")
   if (verbose) {
     print(data.frame("zadanie" = colnames(x),
+                     "min.pkt." = attributes(trudnosci)$min,
                      "maks.pkt." = attributes(trudnosci)$maks,
                      "trudność" = format(round(trudnosci, 2), nsmall = 2),
                      "łatwość" = format(round(1 - trudnosci, 2), nsmall = 2),
@@ -73,6 +74,6 @@ parametry_zadan = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = T
   invisible(list(trudnosc = trudnosci,
                  latwosc = 1 - trudnosci,
                  mocRoznicujaca = mocRoznicujaca,
-                 rzetelnoscBZ = list(alfaC = alfyC$alfaBZ,
-                                     alfaFR = alfyFR$alfaBZ)))
+                 rzetelnoscBZ = list(alfa_c = alfyC$alfaBZ,
+                                     alfa_fr = alfyFR$alfaBZ)))
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/assert_ot.R
 \name{assert_ot}
 \alias{assert_ot}
-\title{Sprawdzanie argumentów funkcji}
+\title{Sprawdzanie argumentow funkcji}
 \usage{
 assert_ot(x, y, nazwaArgumentuX = "x", nazwaArgumentuY = "opisTestu")
 }

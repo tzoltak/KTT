@@ -1,4 +1,4 @@
-#' @title Moc różnicująca
+#' @title Moc roznicujaca
 #' @description Funkcja służy do oszacowania mocy różnicującej zadań.
 #' @param x macierz typu \code{numeric} lub ramka danych (data frame)
 #' zawierająca zmienne typu \code{numeric}
@@ -23,7 +23,7 @@
 #'         krótkich testów lub w sytuacji, gdy dane zadanie ma dużo szerszą
 #'         skalę oceny niż pozostałe;}
 #' }
-#' @seealso \code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}
+#' @seealso \code{\link{parametry_zadan}}, \code{\link{wykres_tmr}}
 #' @return
 #' Funkcja zwraca milcząco dwuelementową listę, której elementy zawierają:
 #' \itemize{

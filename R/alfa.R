@@ -1,5 +1,5 @@
-#' @name alfa
-#' @title Szacowanie rzetelności
+#' @name alfa_c
+#' @title Szacowanie rzetelnosci
 #' @description Funkcje służące do oszacowania rzeteleności testu przy pomocy
 #' współczynnika alfa Cronbacha lub alfa Feldt-Rahu.
 #' @param x macierz typu \code{numeric} lub ramka danych (data frame)
@@ -7,19 +7,19 @@
 #' @param na.rm wartość logiczna - czy przy obliczeniach ignorować braki danych
 #' @param verbose wartość logiczna - czy wydrukować wyniki analizy
 #' @details
-#' Funkcja \code{alfaC} wykorzystuje współczynnik alfa Cronbacha - szerzej
+#' Funkcja \code{alfa_c} wykorzystuje współczynnik alfa Cronbacha - szerzej
 #' rozpoznawalny i stosowany, ale oparty na modelu nakładającym na test bardziej
 #' restrykcyjne założenia (taka sama siła związku pomiędzy mierzoną cechą,
 #' a wynikiem każdego zadania). W efekcie alfa Cronbacha może nieco zaniżać
 #' oszacowanie rzetelności testu.
 #'
-#' Funkcja  \code{alfaFR} wykorzystuje współczynnik alfa Feldt-Raju,
+#' Funkcja  \code{alfa_fr} wykorzystuje współczynnik alfa Feldt-Raju,
 #' o analogicznej interpretacji i podobnej konstrukcji, ale dopuszczający różną
 #' siłę związku pomiędzy mierzoną cechą a wynikami każdego zadania. Jego użycie
 #' jest bardziej adekwatne szczególnie w sytuacji, gdy w teście występuje duża
 #' rozpiętość trudności zadań i/lub różne zadania mają różne skale oceny. Jego
 #' wartość jest zawsze nie mniejsza niż wartość współczynnika alfa Cronbacha.
-#' @seealso \code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}
+#' @seealso \code{\link{parametry_zadan}}, \code{\link{wykres_tmr}}
 #' @return
 #' Funkcje zwracają milcząco trzyelementową listę, której elementy zawierają:
 #' \itemize{
@@ -31,13 +31,13 @@
 #'    \item{\code{wsp = ("alfa Cronbacha" | "alfa Feldt-Raju").}}
 #' }
 #' @examples
-#' alfaC(wynikiSymTest)
-#' alfaFR(wynikiSymTest)
+#' alfa_c(wynikiSymTest)
+#' alfa_fr(wynikiSymTest)
 NULL
-#' @rdname alfa
+#' @rdname alfa_c
 #' @export
 #' @importFrom stats var setNames
-alfaC = function(x, na.rm = TRUE, verbose = TRUE) {
+alfa_c = function(x, na.rm = TRUE, verbose = TRUE) {
   assert_mdfn(x)
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
   stopifnot(length(na.rm) == 1, length(verbose) == 1)
@@ -82,10 +82,10 @@ alfaC = function(x, na.rm = TRUE, verbose = TRUE) {
   class(wynik) = c(class(wynik), "oszacowanieRzetelnosci")
   invisible(wynik)
 }
-#' @rdname alfa
+#' @rdname alfa_c
 #' @export
 #' @importFrom stats var cov setNames
-alfaFR = function(x, na.rm = TRUE, verbose = TRUE) {
+alfa_fr = function(x, na.rm = TRUE, verbose = TRUE) {
   assert_mdfn(x)
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
 

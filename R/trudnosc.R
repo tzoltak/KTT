@@ -1,5 +1,5 @@
 #' @name latwosc
-#' @title Trudność zadań
+#' @title Trudnosc zadan
 #' @description Funkcje do szacowania łatwości/trudności zadań.
 #' @param x macierz typu \code{numeric} lub ramka danych (data frame)
 #' zawierająca zmienne typu \code{numeric}
@@ -40,7 +40,7 @@
 #' łatwość obliczona zostanie jako \code{E(X - min) / (max - min)}, gdzie
 #' \code{X} oznacza wynik zadania, a \code{min} i \code{max} odpowiednio
 #' najmniejszą i największą możliwą do uzyskania wartość wyniku zadania.
-#' @seealso \code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}
+#' @seealso \code{\link{parametry_zadan}}, \code{\link{wykres_tmr}}
 #' @return
 #' Funkcje zwracają milcząco wektor z oszacowaniami łatwości/trudności zadań.
 #' @examples
@@ -68,7 +68,7 @@ trudnosc = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE) {
   if (verbose) {
     cat("Oszacowanie trudności zadań:\n\n",
         info_macierz_danych(x), "\n\n", sep = "")
-    print(data.frame(zadanie = colnames(x), "maks.pkt." = maks,
+    print(data.frame(zadanie = colnames(x), "min.pkt." = min, "maks.pkt." = maks,
                      "trudność" = format(round(trudnosci, 2), nsmall = 2),
                      "łatwość" = format(round(1 - trudnosci, 2), nsmall = 2),
                      check.names = FALSE), row.names = FALSE)

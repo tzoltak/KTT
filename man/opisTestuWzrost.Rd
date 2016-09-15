@@ -3,7 +3,7 @@
 \docType{data}
 \name{opisTestuWzrost}
 \alias{opisTestuWzrost}
-\title{Ankieta na temat wzrostu - opis zadań}
+\title{Ankieta na temat wzrostu - opis zadan}
 \format{data frame: 14 obserwacji, 6 zmiennych}
 \description{
 Opis zadań użytych w ankiecie dotyczącej wzrostu, przeprowadzonej wśród

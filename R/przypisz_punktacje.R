@@ -1,4 +1,4 @@
-#' @title Punktowanie odpowiedzi udzielonych w zadaniach zamkniętych
+#' @title Punktowanie odpowiedzi udzielonych w zadaniach zamknietych
 #' @description Funkcja służy do przypisania punktacji uzyskanej za zadania
 #' zamknięte na podstawie podanego klucza odpowiedzi.
 #' @param x macierz typu \code{numeric} lub ramka danych (data frame)

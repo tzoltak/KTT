@@ -1,4 +1,4 @@
-#' @title Sprawdzanie argumentów funkcji
+#' @title Sprawdzanie argumentow funkcji
 #' @description Funkcja sprawdza, czy argument jest macierz liczbową lub ramką
 #' danych zawierającą tylko zmienne liczbowe.
 #' @param x argument do sprawdzenia
@@ -30,7 +30,7 @@ assert_mdfn = function(x, nazwaArgumentu = "x") {
         return(mode(x))
       }
     })
-    if (!all(kolMode %in% "numeric")){
+    if (!all(kolMode %in% "numeric")) {
       stop(paste0("Wszystkie kolumny ramki danych podanej w argumencie '",
                   nazwaArgumentu,
                   "' muszą zawierać tylko zmienne liczbowe (typu 'numeric').\n",
@@ -38,6 +38,11 @@ assert_mdfn = function(x, nazwaArgumentu = "x") {
                          "' jest typu '", kolMode[!(kolMode %in% "numeric")],
                          "'.\n", collapse = "")))
     }
+  }
+  if (any(duplicated(colnames(x)))) {
+    stop(paste0("Nazwy kolumn ramki danych lub macierzy podanej w argumencie '",
+                nazwaArgumentu,
+                "' muszą być unikalne."))
   }
   if (ncol(x) == 1) {
     warning(paste0("Podane dane zawierają tylko jedną kolumnę, co czyni",
@@ -48,7 +53,7 @@ assert_mdfn = function(x, nazwaArgumentu = "x") {
   }
   return(TRUE)
 }
-#' @title Sprawdzanie argumentów funkcji
+#' @title Sprawdzanie argumentow funkcji
 #' @description Funkcja sprawdza, czy argument jest wektorem liczb pasującym
 #' do odpowiedniej macierzy/ramki danych.
 #' @param x argument do sprawdzenia - wektor
@@ -84,7 +89,7 @@ assert_mm = function(x, y, nazwaArgumentu = "x") {
   }
   return(TRUE)
 }
-#' @title Sprawdzanie argumentów funkcji
+#' @title Sprawdzanie argumentow funkcji
 #' @description Funkcja sprawdza, czy argument jest pasującym do odpowiedniej
 #' macierzy/ramki danych wektorem opisującym minimalne możliwe do przyjęcia
 #' wartości.
@@ -113,7 +118,7 @@ assert_maks = function(maks, x) {
   }
   return(maks)
 }
-#' @title Sprawdzanie argumentów funkcji
+#' @title Sprawdzanie argumentow funkcji
 #' @description Funkcja sprawdza, czy argument jest pasującym do odpowiedniej
 #' macierzy/ramki danych wektorem opisującym minimalne możliwe do przyjęcia
 #' wartości.
@@ -149,7 +154,7 @@ assert_min = function(min, x) {
   }
   return(min)
 }
-#' @title Sprawdzanie argumentów funkcji
+#' @title Sprawdzanie argumentow funkcji
 #' @description Funkcja sprawdza, czy argument jest wektorem liczb.
 #' @param x argument do sprawdzenia
 #' @param nazwaArgumentu nazwa argumentu, która zostanie wstawiona do
@@ -166,7 +171,7 @@ assert_w = function(x, nazwaArgumentu = "x") {
   }
   return(TRUE)
 }
-#' @title Sprawdzanie argumentów funkcji
+#' @title Sprawdzanie argumentow funkcji
 #' @description Funkcja sprawdza, czy argument jest ciągiem znaków.
 #' @param x argument do sprawdzenia
 #' @param nazwaArgumentu nazwa argumentu, która zostanie wstawiona do

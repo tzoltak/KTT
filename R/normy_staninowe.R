@@ -1,4 +1,4 @@
-#' @title Normy staninowe dla sumy punktów
+#' @title Normy staninowe dla sumy punktow
 #' @description Funkcja oblicza normy staninowe dla sumy punktów i przelicza
 #' wyniki zdających na skalę staninową.
 #' @param x macierz typu \code{numeric} lub ramka danych (data frame)
@@ -64,7 +64,7 @@ normy_staninowe = function(x, na.rm = TRUE, verbose = TRUE) {
   return(list(normyStaninowe = normyStaninowe,
               wynikiStaninowe = wynikiStaninowe))
 }
-#' @title Normy staninowe dla sumy punktów
+#' @title Normy staninowe dla sumy punktow
 #' @description Funkcja przekodowuje wynik wyrażony w staninach na wartości
 #' opisujące przydział do trzech grup: 1-3, 4-6, 7-9 stanin.
 #' @param x wektor liczb całkowitych z przedziału [1;9]

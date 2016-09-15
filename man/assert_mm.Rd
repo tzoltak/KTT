@@ -2,7 +2,7 @@
 % Please edit documentation in R/assert.R
 \name{assert_mm}
 \alias{assert_mm}
-\title{Sprawdzanie argumentów funkcji}
+\title{Sprawdzanie argumentow funkcji}
 \usage{
 assert_mm(x, y, nazwaArgumentu = "x")
 }

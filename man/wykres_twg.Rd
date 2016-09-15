@@ -2,7 +2,7 @@
 % Please edit documentation in R/wykres_twg.R
 \name{wykres_twg}
 \alias{wykres_twg}
-\title{Rozkład trudności zadania w podziale na grupy}
+\title{Rozklad trudnosci zadania w podziale na grupy}
 \usage{
 wykres_twg(x, grupy, nazwaGrupowania = "grupa", oznaczMonotonicznosc = TRUE,
   maks = NA, min = NA, na.rm = TRUE, verbose = TRUE)

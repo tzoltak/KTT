@@ -2,7 +2,7 @@
 % Please edit documentation in R/wykres_rd.R
 \name{wykres_rd}
 \alias{wykres_rd}
-\title{Rozkład wyboru dystraktorów}
+\title{Rozklad wyboru dystraktorow}
 \usage{
 wykres_rd(x, poprawnaOdpowiedz, odpowiedzi = NULL, verbose = TRUE)
 }

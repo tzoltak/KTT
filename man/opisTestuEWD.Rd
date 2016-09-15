@@ -3,7 +3,7 @@
 \docType{data}
 \name{opisTestuEWD}
 \alias{opisTestuEWD}
-\title{Test wiedzy o EWD - opis zadań}
+\title{Test wiedzy o EWD - opis zadan}
 \format{data frame: 42 obserwacje, 6 zmiennych}
 \description{
 Opis zadań użytych w teście wiedzy o EWD przeprowadzonego na uczestnikach

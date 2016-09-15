@@ -2,7 +2,7 @@
 % Please edit documentation in R/assert.R
 \name{assert_min}
 \alias{assert_min}
-\title{Sprawdzanie argumentów funkcji}
+\title{Sprawdzanie argumentow funkcji}
 \usage{
 assert_min(min, x)
 }

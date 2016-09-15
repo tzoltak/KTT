@@ -1,4 +1,4 @@
-#' @title Rozkład trudności zadania w podziale na grupy
+#' @title Rozklad trudnosci zadania w podziale na grupy
 #' @description Funkcja rysuje wykres trudności zadania w ramach podanych grup.
 #' @param x wektor liczb zawierający wyniki zadania
 #' @param grupy wektor opisujący przynależność obserwacji do grup

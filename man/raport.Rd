@@ -4,12 +4,20 @@
 \alias{raport}
 \title{Generowanie raportu}
 \usage{
-raport(x, tytul = "Tytul raportu", data = NULL, maks = NULL,
-  na.rm = TRUE)
+raport(x, opisTestu = NULL, format = "html",
+  tytul = "Analiza psychometryczna testu", data = NULL, maks = NULL,
+  min = NULL, na.rm = TRUE)
 }
 \arguments{
-\item{x}{macierz typu \code{numeric} lub ramka danych (data frame)
-zawierająca zmienne typu \code{numeric}}
+\item{x}{ramka danych (data frame) zawierająca wyniki testu}
+
+\item{opisTestu}{opcjonalnie ramka danych zawierająca opis struktury testu
+(p. \code{\link{przypisz_punktacje}})}
+
+\item{format}{definiuje format pliku, w którym wygenerowany zostanie raport:
+jest to wektor składający się z jednej lub kilku spośród trzech wartości:
+'html' (plik HTML), 'docx' (plik programu MS Word), 'odt' (plik programu
+Open Office/Libre Office)}
 
 \item{tytul}{tytuł raportu (ciąg znaków)}
 
@@ -18,19 +26,32 @@ zawierająca zmienne typu \code{numeric}}
 \item{maks}{opcjonalnie wektor liczb całkowitych opisujący maksymalną
 liczbę puntków możliwych do uzyskania za poszczególne zadania}
 
+\item{min}{opcjonalnie wektor liczb całkowitych opisujący minimalną
+wartość, jaką może przyjąć wynik poszczególnych zadań}
+
 \item{na.rm}{wartość logiczna - czy przy obliczeniach ignorować braki danych}
 }
 \value{
 Funkcja nic nie zwraca.
+
+Efektem działania funkcji jest wygenerowanie pliku/plików z raportem
+w aktywnym katalogu.
 }
 \description{
 Funkcja generuje raport zawierający wyniki analizy
-psyhometrycznej testu.
+psyhometrycznej testu. Zostanie on zapisany w aktywnym katalogu
+(p. \code{\link[base]{setwd}}).
 }
 \examples{
+\dontrun{
 raport(wynikiSymTest)
+raport(daneEWD, opisTestuEWD)
+}
 }
 \seealso{
-\code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}
+\code{\link{przypisz_punktacje}}, \code{\link{parametry_zadan}},
+\code{\link{wykres_tmr}}, \code{\link{normy_staninowe}},
+\code{\link{wykres_rs}}, \code{\link{wykres_rd}}, \code{\link{wykres_rwz}},
+\code{\link{wykres_twg}}#'
 }
 

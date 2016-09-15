@@ -1,8 +1,8 @@
 Package: KTT
 Type: Package
 Title: Classical Test Theory tools
-Version: 0.3.0
-Date: 2016-14-09
+Version: 0.4.0
+Date: 2016-15-09
 Authors@R: c(
   person("Tomasz", "Żółtak", email = "tomek@zozlak.org", role = c("aut", "cre")))
 Description: Package provides tools that enable to perform basic psychometric analysis of cognitive tests.
@@ -15,4 +15,5 @@ Imports:
 License: MIT + file LICENSE
 LazyData: TRUE
 Encoding: UTF-8
+VignetteBuilder: knitr
 RoxygenNote: 5.0.1

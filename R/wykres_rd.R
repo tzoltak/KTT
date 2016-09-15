@@ -1,4 +1,4 @@
-#' @title Rozkład wyboru dystraktorów
+#' @title Rozklad wyboru dystraktorow
 #' @description Funkcja rysuje wykres rozkładu częstości wyboru dystraktorów
 #' w danym zadaniu.
 #' @param x wektor odpowiedzi na zadanie
@@ -70,7 +70,7 @@ wykres_rd = function(x, poprawnaOdpowiedz, odpowiedzi = NULL, verbose = TRUE) {
   oldPar = par(no.readonly = TRUE)
   on.exit({par(oldPar)})
   par(mar = c(5, 5, 1, 1) + 0.1)
-  barplot(p, col = grey(0.3), ylab = "częstość",
+  barplot(p, col = "lightblue", ylab = "częstość",
           xlab = "dystraktory\n(b.o. - brak odpowiedzi)")
   grid(nx = NA, ny = NULL, col = grey(0.5))
 

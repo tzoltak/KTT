@@ -2,7 +2,7 @@
 % Please edit documentation in R/assert.R
 \name{assert_t}
 \alias{assert_t}
-\title{Sprawdzanie argumentów funkcji}
+\title{Sprawdzanie argumentow funkcji}
 \usage{
 assert_t(x, nazwaArgumentu = "x")
 }

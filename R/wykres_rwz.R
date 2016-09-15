@@ -1,4 +1,4 @@
-#' @title Rozkład wyników zadania
+#' @title Rozklad wynikow zadania
 #' @description Funkcja rysuje wykres rozkładu sumy punktów uzyskanych w zadaniu.
 #' @param x wektor liczb zawierający wyniki zadania
 #' @param wartosci opcjonalnie wektor liczb zawierający wszystkie wartości,

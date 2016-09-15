@@ -2,7 +2,7 @@
 % Please edit documentation in R/przypisz_punktacje.R
 \name{przypisz_punktacje}
 \alias{przypisz_punktacje}
-\title{Punktowanie odpowiedzi udzielonych w zadaniach zamkniętych}
+\title{Punktowanie odpowiedzi udzielonych w zadaniach zamknietych}
 \usage{
 przypisz_punktacje(x, opisTestu, verbose = TRUE)
 }

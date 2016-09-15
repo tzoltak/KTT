@@ -1,4 +1,4 @@
-#' @title Sprawdzanie argumentów funkcji
+#' @title Sprawdzanie argumentow funkcji
 #' @description Funkcja sprawdza, czy podane dane są zgodne podanym opisem
 #' struktury testu (oraz czy sam ten opis jest poprawny).
 #' @param x argument do sprawdzenia - dane

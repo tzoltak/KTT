@@ -2,7 +2,7 @@
 % Please edit documentation in R/normy_staninowe.R
 \name{normy_staninowe}
 \alias{normy_staninowe}
-\title{Normy staninowe dla sumy punktów}
+\title{Normy staninowe dla sumy punktow}
 \usage{
 normy_staninowe(x, na.rm = TRUE, verbose = TRUE)
 }

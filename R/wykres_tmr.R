@@ -1,4 +1,4 @@
-#' @title Parametry zadań
+#' @title Parametry zadan
 #' @description Funkcja rysuje wykres trudności i mocy różnicującej zadań.
 #' @param x macierz typu \code{numeric} lub ramka danych (data frame)
 #' zawierająca zmienne typu \code{numeric}
@@ -33,7 +33,7 @@
 #' \bold{Kolory punktów}
 #' Punkty reprezentujące zadania kolorowane są w zależności od wartości
 #' wskaźnika rzetelności bez zadania (używany jest współczynnik alfa Feldt-Raju,
-#' p. \code{\link{alfaFR}}. Zielone reprezentują zadania, po usunięciu których
+#' p. \code{\link{alfa_fr}}. Zielone reprezentują zadania, po usunięciu których
 #' reztelność testu spada, a czerwone te, po usunięciu których rzetelność testu
 #' rośnie (ta druga sytuacja jest niepożądana).
 #' \bold{Obwiednia maksymalnych wartości korelacji}
@@ -47,11 +47,11 @@
 #' @return
 #' Funkcja nic nie zwraca.
 #' @examples
-#' wykres_lmr(wynikiSymTest)
+#' wykres_tmr(wynikiSymTest)
 #' @export
 #' @importFrom graphics abline lines par plot text
 #' @importFrom grDevices grey
-wykres_lmr = function(x, wsk = "Pearson", maks = NULL, min = NULL) {
+wykres_tmr = function(x, wsk = "Pearson", maks = NULL, min = NULL) {
   wsk = tolower(wsk)
   if (!(wsk %in% c("pearson", "dwuseryjna", "bez zadania", "p", "d", "b"))) {
     stop(paste0("Parametr 'wsk' musi przyjmować jedną z wartości: 'pearson', ",
@@ -69,7 +69,7 @@ wykres_lmr = function(x, wsk = "Pearson", maks = NULL, min = NULL) {
 
   trudnosci = trudnosc(x, na.rm = TRUE, verbose = FALSE)
   mocRoznicujaca = moc_roznicujaca(x, na.rm = TRUE, verbose = FALSE)
-  alfyFR = alfaFR(x, na.rm = TRUE, verbose = FALSE)
+  alfyFR = alfa_fr(x, na.rm = TRUE, verbose = FALSE)
   alfyFR = c(3, 2)[1 + as.numeric(alfyFR$alfaBZ > alfyFR$alfa)]
 
   if (wsk == "p") {

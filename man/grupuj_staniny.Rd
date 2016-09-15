@@ -2,7 +2,7 @@
 % Please edit documentation in R/normy_staninowe.R
 \name{grupuj_staniny}
 \alias{grupuj_staniny}
-\title{Normy staninowe dla sumy punktów}
+\title{Normy staninowe dla sumy punktow}
 \usage{
 grupuj_staniny(x)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/assert.R
 \name{assert_maks}
 \alias{assert_maks}
-\title{Sprawdzanie argumentów funkcji}
+\title{Sprawdzanie argumentow funkcji}
 \usage{
 assert_maks(maks, x)
 }

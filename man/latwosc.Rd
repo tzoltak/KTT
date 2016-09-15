@@ -3,7 +3,7 @@
 \name{latwosc}
 \alias{latwosc}
 \alias{trudnosc}
-\title{Trudność zadań}
+\title{Trudnosc zadan}
 \usage{
 trudnosc(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE)
 
@@ -66,6 +66,6 @@ trudnosc(wynikiSymTest)
 latwosc(wynikiSymTest)
 }
 \seealso{
-\code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}
+\code{\link{parametry_zadan}}, \code{\link{wykres_tmr}}
 }
 

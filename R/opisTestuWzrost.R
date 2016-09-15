@@ -1,7 +1,7 @@
 #' @docType data
 #' @keywords datasets
 #' @name opisTestuWzrost
-#' @title Ankieta na temat wzrostu - opis zadań
+#' @title Ankieta na temat wzrostu - opis zadan
 #' @description
 #' Opis zadań użytych w ankiecie dotyczącej wzrostu, przeprowadzonej wśród
 #' uczestnikówtrzeciego \emph{Spotkania Entuzjastów R}, które odbyło się

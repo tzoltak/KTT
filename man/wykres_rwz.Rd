@@ -2,7 +2,7 @@
 % Please edit documentation in R/wykres_rwz.R
 \name{wykres_rwz}
 \alias{wykres_rwz}
-\title{Rozkład wyników zadania}
+\title{Rozklad wynikow zadania}
 \usage{
 wykres_rwz(x, wartosci = NULL, verbose = TRUE)
 }

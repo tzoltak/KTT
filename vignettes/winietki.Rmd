@@ -1,0 +1,9 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Winietki online}
+\usepackage[utf8]{inputenc}
+-->
+
+# Winietki pakietu 'KTT'
+
+Winietki pakietu KTT dostępne są [tutaj](https://github.com/tzoltak/KTT/wiki)

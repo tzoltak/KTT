@@ -2,7 +2,7 @@
 % Please edit documentation in R/moc_roznicujaca.R
 \name{moc_roznicujaca}
 \alias{moc_roznicujaca}
-\title{Moc różnicująca}
+\title{Moc roznicujaca}
 \usage{
 moc_roznicujaca(x, na.rm = TRUE, verbose = TRUE)
 }
@@ -52,6 +52,6 @@ Funkcja służy do oszacowania mocy różnicującej zadań.
 moc_roznicujaca(wynikiSymTest)
 }
 \seealso{
-\code{\link{parametry_zadan}}, \code{\link{wykres_lmr}}
+\code{\link{parametry_zadan}}, \code{\link{wykres_tmr}}
 }
 
