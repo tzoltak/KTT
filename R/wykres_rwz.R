@@ -12,9 +12,9 @@
 #' @importFrom graphics barplot grid abline
 #' @importFrom stats na.omit
 wykres_rwz = function(x, wartosci = NULL, verbose = TRUE) {
-  assert_w(x, typ = c("numeric", "integer", "logical", "character", "factor"))
+  assert_w(x)
   if (!is.null(wartosci)) {
-    assert_w(wartosci)
+    assert_w(wartosci, typ = c("numeric", "integer", "logical", "character", "factor"))
     if (!all(na.omit(x) %in% wartosci)) {
       stop(paste0("W wektorze podanym argumentem 'x' pojawiają się  wartości, ",
                   "które nie występują w wektorze podanym argumentem 'wartosci'."))
