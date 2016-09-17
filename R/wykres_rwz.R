@@ -12,7 +12,7 @@
 #' @importFrom graphics barplot grid abline
 #' @importFrom stats na.omit
 wykres_rwz = function(x, wartosci = NULL, verbose = TRUE) {
-  assert_w(x)
+  assert_w(x, typ = c("numeric", "integer", "logical", "character", "factor"))
   if (!is.null(wartosci)) {
     assert_w(wartosci)
     if (!all(na.omit(x) %in% wartosci)) {

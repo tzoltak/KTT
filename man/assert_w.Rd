@@ -4,19 +4,23 @@
 \alias{assert_w}
 \title{Sprawdzanie argumentow funkcji}
 \usage{
-assert_w(x, nazwaArgumentu = "x")
+assert_w(x, nazwaArgumentu = "x", typ = c("numeric", "integer", "logical"))
 }
 \arguments{
 \item{x}{argument do sprawdzenia}
 
 \item{nazwaArgumentu}{nazwa argumentu, która zostanie wstawiona do
 komunikatów o błędzie}
+
+\item{typ}{wektor ciągów znaków zawierający dopuszczalne typy}
 }
 \value{
 Funkcja zwraca \code{TRUE} jeśli argument jest wektorem liczb. W przeciwnym
 wypadku wywołuje błąd.
 }
 \description{
-Funkcja sprawdza, czy argument jest wektorem liczb.
+Funkcja sprawdza, czy argument jest wektorem zadanego typu
+(przez typ rozumiana jest tu wartość zwracana przez funkcję
+\code{\link[base]{class}}.
 }
 

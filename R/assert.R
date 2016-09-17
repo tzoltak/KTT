@@ -155,19 +155,24 @@ assert_min = function(min, x) {
   return(min)
 }
 #' @title Sprawdzanie argumentow funkcji
-#' @description Funkcja sprawdza, czy argument jest wektorem liczb.
+#' @description Funkcja sprawdza, czy argument jest wektorem zadanego typu
+#' (przez typ rozumiana jest tu wartość zwracana przez funkcję
+#' \code{\link[base]{class}}.
 #' @param x argument do sprawdzenia
 #' @param nazwaArgumentu nazwa argumentu, która zostanie wstawiona do
 #' komunikatów o błędzie
+#' @param typ wektor ciągów znaków zawierający dopuszczalne typy
 #' @return
 #' Funkcja zwraca \code{TRUE} jeśli argument jest wektorem liczb. W przeciwnym
 #' wypadku wywołuje błąd.
-assert_w = function(x, nazwaArgumentu = "x") {
+assert_w = function(x, nazwaArgumentu = "x",
+                    typ = c("numeric", "integer", "logical")) {
   if (!is.vector(x)) {
     stop(paste0("Argument '", nazwaArgumentu, "' musi być wektorem liczb."))
   }
-  if (!is.numeric(x)) {
-    stop(paste0("Argument '", nazwaArgumentu, "' musi być wektorem liczb."))
+  if (!(class(x) %in% typ)) {
+    stop(paste0("Argument '", nazwaArgumentu, "' musi być wektorem typu .",
+                "(klasy) '", paste0(typ, collapse = "' lub '"), "'."))
   }
   return(TRUE)
 }
