@@ -2,7 +2,9 @@
 
 export(alfa_c)
 export(alfa_fr)
+export(export)
 export(grupuj_staniny)
+export(import)
 export(latwosc)
 export(moc_roznicujaca)
 export(normy_staninowe)
