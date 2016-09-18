@@ -40,6 +40,9 @@
 #' @importFrom stats var cor dnorm qnorm setNames
 moc_roznicujaca = function(x, na.rm = TRUE, verbose = TRUE) {
   assert_mdfn(x)
+  if ("tbl_df" %in% class(x)) {
+    x = as.data.frame(x)
+  }
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
   stopifnot(length(na.rm) == 1, length(verbose) == 1)
 

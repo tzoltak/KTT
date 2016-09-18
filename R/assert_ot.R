@@ -17,6 +17,12 @@ assert_ot = function(x, y, nazwaArgumentuX = "x",
     stop(paste0("Argument '", nazwaArgumentuX,
                 "' musi być macierzą (matrix) lub ramką danych (data frame)."))
   }
+  if ("tbl_df" %in% class(x)) {
+    x = as.data.frame(x)
+  }
+  if ("tbl_df" %in% class(y)) {
+    y = as.data.frame(y)
+  }
   #|-> Sprawdzanie poprawności opisu struktury testu
   if (!is.data.frame(y)) {
     stop(paste0("Argument '", nazwaArgumentuY,
@@ -159,7 +165,11 @@ assert_ot = function(x, y, nazwaArgumentuX = "x",
         paste0("'", paste0(temp[1:min(c(3, length(temp)))],
                            collapse = "', '"), "'",
                ifelse(length(temp) > 3,
-                      paste0(", ... i ", length(temp) - 3, " innych wartości"),
+                      paste0(", ... (i ", length(temp) - 3, " ",
+                             ifelse(length(temp) > 4, ifelse(length(temp) < 8,
+                                                             "inne wartości",
+                                                             "innych wartości"),
+                                    "inna wartość"), ")"),
                       ""))
     }
   }

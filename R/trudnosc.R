@@ -49,6 +49,9 @@
 #' @export
 trudnosc = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE) {
   assert_mdfn(x)
+  if ("tbl_df" %in% class(x)) {
+    x = as.data.frame(x)
+  }
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
   stopifnot(length(na.rm) == 1, length(verbose) == 1)
   if (is.null(maks) & "maks" %in% names(attributes(x))) {

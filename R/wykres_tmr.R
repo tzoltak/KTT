@@ -52,6 +52,10 @@
 #' @importFrom graphics abline lines par plot text
 #' @importFrom grDevices grey
 wykres_tmr = function(x, wsk = "Pearson", maks = NULL, min = NULL) {
+  assert_mdfn(x)
+  if ("tbl_df" %in% class(x)) {
+    x = as.data.frame(x)
+  }
   wsk = tolower(wsk)
   if (!(wsk %in% c("pearson", "dwuseryjna", "bez zadania", "p", "d", "b"))) {
     stop(paste0("Parametr 'wsk' musi przyjmować jedną z wartości: 'pearson', ",

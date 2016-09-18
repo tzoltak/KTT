@@ -82,6 +82,12 @@
 #' @importFrom stats var cor dnorm qnorm setNames
 przypisz_punktacje = function(x, opisTestu, verbose = TRUE) {
   opisTestu = assert_ot(x, opisTestu)
+  if ("tbl_df" %in% class(x)) {
+    x = as.data.frame(x)
+  }
+  if ("tbl_df" %in% class(opisTestu)) {
+    x = as.data.frame(opisTestu)
+  }
   stopifnot(verbose %in% c(TRUE, FALSE))
   stopifnot(length(verbose) == 1)
 

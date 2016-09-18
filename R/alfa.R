@@ -39,6 +39,9 @@ NULL
 #' @importFrom stats var setNames
 alfa_c = function(x, na.rm = TRUE, verbose = TRUE) {
   assert_mdfn(x)
+  if ("tbl_df" %in% class(x)) {
+    x = as.data.frame(x)
+  }
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
   stopifnot(length(na.rm) == 1, length(verbose) == 1)
 

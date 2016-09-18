@@ -3,6 +3,10 @@
 #' wyniki zdających na skalę staninową.
 #' @param x macierz typu \code{numeric} lub ramka danych (data frame)
 #' zawierająca zmienne typu \code{numeric}
+#' @param maks opcjonalnie wektor liczb całkowitych opisujący maksymalną
+#' liczbę puntków możliwych do uzyskania za poszczególne zadania
+#' @param min opcjonalnie wektor liczb całkowitych opisujący minimalną
+#' wartość, jaką może przyjąć wynik poszczególnych zadań
 #' @param na.rm wartość logiczna - czy przy obliczeniach ignorować braki danych
 #' @param verbose wartość logiczna - czy wydrukować wyniki analizy
 #' @return
@@ -19,10 +23,18 @@
 #' normy_staninowe(wynikiSymTest)
 #' @export
 #' @importFrom stats sd pnorm
-normy_staninowe = function(x, na.rm = TRUE, verbose = TRUE) {
+normy_staninowe = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = TRUE) {
   assert_mdfn(x)
   stopifnot(na.rm %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
   stopifnot(length(na.rm) == 1, length(verbose) == 1)
+  if (is.null(maks) & "maks" %in% names(attributes(x))) {
+    maks = attributes(x)$maks
+  }
+  if (is.null(min) & "min" %in% names(attributes(x))) {
+    min = attributes(x)$min
+  }
+  maks = sum(assert_maks(maks, x))
+  min = sum(assert_min(min, x))
 
   suma = rowSums(x, na.rm = na.rm)
   punktyCiecia = mean(suma, na.rm = na.rm) +
@@ -30,8 +42,8 @@ normy_staninowe = function(x, na.rm = TRUE, verbose = TRUE) {
   normyStaninowe = data.frame(stanin = 1:9, min_pkt = NA, maks_pkt = NA)
   wynikiStaninowe = as.numeric(rep(NA, nrow(x)))
   for (i in 1:9) {
-    normyStaninowe$min_pkt[i] = ceiling(c(min(suma), punktyCiecia)[i])
-    normyStaninowe$maks_pkt[i] = floor(c(punktyCiecia, max(suma))[i])
+    normyStaninowe$min_pkt[i] = ceiling(c(min, punktyCiecia)[i])
+    normyStaninowe$maks_pkt[i] = floor(c(punktyCiecia, maks)[i])
     wynikiStaninowe[(suma >= normyStaninowe$min_pkt[i]) &
                       (suma <= normyStaninowe$maks_pkt[i]) &
                       !is.na(suma)] = i
@@ -39,6 +51,10 @@ normy_staninowe = function(x, na.rm = TRUE, verbose = TRUE) {
       normyStaninowe$min_pkt[i] = normyStaninowe$maks_pkt[i] = NA
     }
   }
+  normyStaninowe = within(normyStaninowe, {
+    min_pkt[!is.na(min_pkt)][1] = min
+    maks_pkt[!is.na(maks_pkt)][sum(!is.na(maks_pkt))] = maks
+  })
 
   if (verbose) {
     rozkladStaninow = as.vector(table(factor(wynikiStaninowe, 1:9)))

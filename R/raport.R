@@ -39,6 +39,9 @@ raport = function(x, opisTestu = NULL, format = "html",
   dec = options()$OutDec
   options(OutDec = ",")
   on.exit(options(OutDec = dec))
+  if ("tbl_df" %in% class(x)) {
+    x = as.data.frame(x)
+  }
   if (is.null(opisTestu)) {
     message(paste0("Informacja:\n\n",
                    "Nie podano argumentu 'opisTestu'. Oznacza to, że:\n",
