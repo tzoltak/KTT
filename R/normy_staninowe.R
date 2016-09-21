@@ -77,8 +77,8 @@ normy_staninowe = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = T
     cat("\n")
   }
 
-  return(list(normyStaninowe = normyStaninowe,
-              wynikiStaninowe = wynikiStaninowe))
+  invisible(list(normyStaninowe = normyStaninowe,
+                 wynikiStaninowe = wynikiStaninowe))
 }
 #' @title Normy staninowe dla sumy punktow
 #' @description Funkcja przekodowuje wynik wyrażony w staninach na wartości

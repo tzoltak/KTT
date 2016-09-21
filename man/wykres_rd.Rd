@@ -4,7 +4,8 @@
 \alias{wykres_rd}
 \title{Rozklad wyboru dystraktorow}
 \usage{
-wykres_rd(x, poprawnaOdpowiedz, odpowiedzi = NULL, verbose = TRUE)
+wykres_rd(x, poprawnaOdpowiedz, odpowiedzi = NULL, pokazBO = TRUE,
+  verbose = TRUE)
 }
 \arguments{
 \item{x}{wektor odpowiedzi na zadanie}
@@ -13,6 +14,9 @@ wykres_rd(x, poprawnaOdpowiedz, odpowiedzi = NULL, verbose = TRUE)
 
 \item{odpowiedzi}{opcjonalnie wektor tekstowy lub liczbowy zawierający
 wszystkie wartości, jakie może przyjąć wynik zadania}
+
+\item{pokazBO}{wartość logiczna - czy na wykresie rysować również częstość
+występowania braków odpowiedzi?}
 
 \item{verbose}{wartość logiczna - czy wydrukować wyniki analizy}
 }

@@ -39,8 +39,8 @@ parametry_zadan = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = T
       "\n\n", sep = "")
   if (verbose) {
     print(data.frame("zadanie" = colnames(x),
-                     "min.pkt." = attributes(trudnosci)$min,
-                     "maks.pkt." = attributes(trudnosci)$maks,
+                     "min." = attributes(trudnosci)$min,
+                     "maks." = attributes(trudnosci)$maks,
                      "trudność" = format(round(trudnosci, 2), nsmall = 2),
                      "łatwość" = format(round(1 - trudnosci, 2), nsmall = 2),
                      "MR-P" = format(round(mocRoznicujaca$korelacjePearsona, 3),
@@ -62,6 +62,8 @@ parametry_zadan = function(x, maks = NULL, min = NULL, na.rm = TRUE, verbose = T
                      check.names = FALSE), row.names = FALSE)
 
     cat("\n",
+        "min.       - minimalna liczba punktów możliwych do uzyskania za zadanie\n",
+        "maks.      - maksymalna liczba punktów możliwych do uzyskania za zadanie\n",
         "MR-P       - moc różnicująca: korelacja liniowa Pearsona (punktowo-dwuseryjna)\n",
         "MR-PBZ     - moc różnicująca: korelacja Pearsona z sumą punktów z wyłączeniem danego zadania\n",
         "MR-DS      - moc różnicująca: korelacja dwuseryjna\n",

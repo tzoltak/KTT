@@ -5,6 +5,8 @@
 #' @param poprawnaOdpowiedz ciąg znaków lub liczba będąca poprawną odpowiedzią
 #' @param odpowiedzi opcjonalnie wektor tekstowy lub liczbowy zawierający
 #' wszystkie wartości, jakie może przyjąć wynik zadania
+#' @param pokazBO wartość logiczna - czy na wykresie rysować również częstość
+#' występowania braków odpowiedzi?
 #' @param verbose wartość logiczna - czy wydrukować wyniki analizy
 #' @details
 #' Jako dystraktory rozumie się tu tylko niepoprawne odpowiedzi (odpowiedź
@@ -19,8 +21,9 @@
 #' @export
 #' @importFrom graphics barplot grid
 #' @importFrom stats na.omit
-wykres_rd = function(x, poprawnaOdpowiedz, odpowiedzi = NULL, verbose = TRUE) {
-  if (!is.vector(poprawnaOdpowiedz)) {
+wykres_rd = function(x, poprawnaOdpowiedz, odpowiedzi = NULL, pokazBO = TRUE,
+                     verbose = TRUE) {
+  if (!is.vector(poprawnaOdpowiedz) & !is.factor(poprawnaOdpowiedz)) {
     stop(paste0("Argument 'poprawnaOdpowiedź' musi być ciągiem znaków ",
                 "(jednoelementowym wektorem typu 'character') lub liczbą."))
   }
@@ -34,13 +37,13 @@ wykres_rd = function(x, poprawnaOdpowiedz, odpowiedzi = NULL, verbose = TRUE) {
   if (is.null(odpowiedzi)) {
     odpowiedzi = setdiff(sort(na.omit(unique(x))), "")
   } else {
-    if (!is.vector(odpowiedzi)) {
+    if (!is.vector(odpowiedzi) & !is.factor(odpowiedzi)) {
       stop(paste0("Argument 'odpowiedzi' musi być wektorem typu 'character' ",
                   "lub typu 'numeric' (lub factorem)."))
     }
   }
-  stopifnot(verbose %in% c(FALSE, TRUE))
-  stopifnot(length(verbose) == 1)
+  stopifnot(pokazBO %in% c(FALSE, TRUE), verbose %in% c(FALSE, TRUE))
+  stopifnot(length(pokazBO) == 1, length(verbose) == 1)
   odpowiedzi = as.character(odpowiedzi)
 
   poprawnaOdpowiedz = as.character(poprawnaOdpowiedz)
@@ -54,8 +57,12 @@ wykres_rd = function(x, poprawnaOdpowiedz, odpowiedzi = NULL, verbose = TRUE) {
   if (any(x == "b.o.")) {
     odpowiedzi = c(odpowiedzi, "b.o.")
   }
+  niePokazuj = poprawnaOdpowiedz
+  if (!pokazBO) {
+    niePokazuj = c(poprawnaOdpowiedz, "b.o.")
+  }
   x = factor(x, odpowiedzi)
-  n = table(x, exclude = poprawnaOdpowiedz)
+  n = table(x, exclude = niePokazuj)
   p = n / length(x)
   if (verbose) {
     cat("Rozkład wyboru dystraktorów:\n\n")
